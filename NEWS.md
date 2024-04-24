@@ -1,3 +1,9 @@
+## Changes in version 1.30.0
+
+### Bug fixes and minor improvements
+
+* Updated CITATION information in the main vignette.
+
 ## Changes in version 1.28.0
 
 ### New features
