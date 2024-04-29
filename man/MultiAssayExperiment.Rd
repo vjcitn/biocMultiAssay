@@ -15,10 +15,10 @@ MultiAssayExperiment(
 )
 }
 \arguments{
-\item{experiments}{A \code{list} or \link{ExperimentList} of all
+\item{experiments}{A \code{list} or \code{\link{ExperimentList}} of all
 combined experiments}
 
-\item{colData}{A \code{\linkS4class{DataFrame}} or \code{data.frame} of
+\item{colData}{A \code{\link{DataFrame}} or \code{data.frame} of
 characteristics for all biological units}
 
 \item{sampleMap}{A \code{DataFrame} or \code{data.frame} of assay names,
@@ -35,7 +35,7 @@ A \code{MultiAssayExperiment} object that can store
 experiment and phenotype data
 }
 \description{
-The constructor function for the \link{MultiAssayExperiment-class} combines
+The constructor function for the \linkS4class{MultiAssayExperiment} combines
 multiple data elements from the different hierarchies of data
 (study, experiments, and samples). It can create instances where neither
 a \code{sampleMap} or a \code{colData} set is provided. Please see the
@@ -43,36 +43,36 @@ MultiAssayExperiment API documentation for more information.
 }
 \section{colData}{
 
-The `colData` input can be either `DataFrame` or `data.frame` with
-subsequent coercion to DataFrame. The rownames in the `colData` must match
+The \code{colData} input can be either \code{DataFrame} or \code{data.frame} with
+subsequent coercion to DataFrame. The rownames in the \code{colData} must match
 the colnames in the experiments if no sampleMap is provided.
 }
 
 \section{experiments}{
 
-The `experiments` input can be of class \linkS4class{SimpleList} or `list`.
+The \code{experiments} input can be of class \code{\link{SimpleList}} or \code{list}.
 This input becomes the \code{\link{ExperimentList}}. Each element of the
-input `list` or `List` must be named, rectangular with two dimensions, and
-have `dimnames`.
+input \code{list} or \code{List} must be named, rectangular with two dimensions, and
+have \code{dimnames}.
 }
 
 \section{sampleMap}{
 
-The \code{\link{sampleMap}} can either be input as `DataFrame` or
-`data.frame` with eventual coercion to `DataFrame`. The `sampleMap` relates
+The \code{\link{sampleMap}} can either be input as \code{DataFrame} or
+\code{data.frame} with eventual coercion to \code{DataFrame}. The \code{sampleMap} relates
 biological units and biological measurements within each assay. Each row in
-the `sampleMap` is a single such link. The standard column names of the
-`sampleMap` are "assay", "primary", and "colname".  Note that the "assay"
+the \code{sampleMap} is a single such link. The standard column names of the
+\code{sampleMap} are "assay", "primary", and "colname".  Note that the "assay"
 column is a factor corresponding to the names of each experiment in the
-`ExperimentList`. In the case where these names do not match between the
-`sampleMap` and the experiments, the documented experiments in the
-`sampleMap` take precedence and experiments are dropped by the harmonization
-procedure. The constructor function will generate a `sampleMap` in the case
+\code{ExperimentList}. In the case where these names do not match between the
+\code{sampleMap} and the experiments, the documented experiments in the
+\code{sampleMap} take precedence and experiments are dropped by the harmonization
+procedure. The constructor function will generate a \code{sampleMap} in the case
 where it is not provided and this method may be a 'safer' alternative for
-creating the `MultiAssayExperiment` (so long as the rownames are identical
-in the `colData`, if provided).  An empty `sampleMap` may produce empty
-experiments if the levels of the "assay" factor in the `sampleMap` do not
-match the names in the `ExperimentList`.
+creating the \code{MultiAssayExperiment} (so long as the rownames are identical
+in the \code{colData}, if provided).  An empty \code{sampleMap} may produce empty
+experiments if the levels of the "assay" factor in the \code{sampleMap} do not
+match the names in the \code{ExperimentList}.
 }
 
 \examples{
@@ -115,5 +115,5 @@ mae <- MultiAssayExperiment(experiments = ExpList, colData = colDat,
     sampleMap = sampMap)
 }
 \seealso{
-\link{MultiAssayExperiment-class}
+\linkS4class{MultiAssayExperiment}
 }

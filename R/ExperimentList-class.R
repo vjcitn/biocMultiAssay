@@ -8,17 +8,17 @@
 #'
 #' @title ExperimentList - A container for multi-experiment data
 #'
-#' @description The \code{ExperimentList} class is a container that builds on
-#'   the \code{SimpleList} with additional checks for consistency in experiment
-#'   names and length. It contains a \code{SimpleList} of experiments with
+#' @description The `ExperimentList` class is a container that builds on
+#'   the `SimpleList` with additional checks for consistency in experiment
+#'   names and length. It contains a `SimpleList` of experiments with
 #'   sample identifiers. One element present per experiment performed.
 #'
-#'   Convert from \code{SimpleList} or \code{list} to the multi-experiment data
-#'   container. When using the \strong{mergeReplicates} method, additional
-#'   arguments are passed to the given \code{simplify} function argument (e.g.,
+#'   Convert from `SimpleList` or `list` to the multi-experiment data
+#'   container. When using the **mergeReplicates** method, additional
+#'   arguments are passed to the given `simplify` function argument (e.g.,
 #'   \code{na.rm = TRUE})
 #'
-#' @return An \code{ExperimentList} class object
+#' @return An `ExperimentList` class object
 #'
 #' @examples
 #'
@@ -31,15 +31,15 @@ setClass("ExperimentList", contains = "SimpleList")
 ### Constructor
 ###
 
-#' Represent multiple experiments as a List-derivative \code{ExperimentList}
+#' Represent multiple experiments as a List-derivative `ExperimentList`
 #'
-#' The \code{ExperimentList} class can contain several different types of data.
-#' The only requirements for an \code{ExperimentList} class are that the
-#' objects contained have the following set of methods: \code{dim}, \code{[},
-#' \code{dimnames}
+#' The `ExperimentList` class can contain several different types of data.
+#' The only requirements for an `ExperimentList` class are that the
+#' objects contained have the following set of methods: `dim`, \code{[},
+#' `dimnames`
 #'
-#' @param ... A named \code{list} class object
-#' @return A \code{ExperimentList} class object of experiment data
+#' @param ... A named `list` class object
+#' @return A `ExperimentList` class object of experiment data
 #'
 #' @example inst/scripts/ExperimentList-Ex.R
 #' @export
@@ -166,10 +166,9 @@ S4Vectors::setValidity2("ExperimentList", .validExperimentList)
     vapply(x, `[`, integer(1L), pos)
 }
 
-#' @describeIn ExperimentList Show method for
-#' \code{\linkS4class{ExperimentList}} class
+#' @describeIn ExperimentList Show method for [`ExperimentList`] class
 #'
-#' @param object,x An \code{\linkS4class{ExperimentList}} object
+#' @param object,x An [`ExperimentList`] object
 setMethod("show", "ExperimentList", function(object) {
     o_class <- class(object)
     elem_cl <- vapply(object, function(o) { class(o)[[1L]] }, character(1L))
@@ -198,15 +197,13 @@ coerceToExperimentList <- function(from) {
 #'
 #' @section
 #' coercion:
-#'  Convert a \code{list} or S4 \code{List} to an ExperimentList using the
+#'  Convert a `list` or S4 `List` to an ExperimentList using the
 #'  `as()` function.
 #'
-#'  In the following example, \code{x} is either a \code{list} or
-#'  \linkS4class{List}:
+#'  In the following example, `x` is either a `list` or
+#'  [`List`]:
 #'
-#'  \preformatted{    \code{as(x, "ExperimentList")}}
-#'
-#' @md
+#'  \preformatted{    as(x, "ExperimentList")}
 #'
 #' @exportMethod coerce
 

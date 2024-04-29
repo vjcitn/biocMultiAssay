@@ -23,42 +23,39 @@ NULL
 #' The `MultiAssayExperiment` class can be used to manage results of
 #' diverse assays on a collection of specimen. Currently,  the class can handle
 #' assays that are organized instances of
-#' \code{\linkS4class{SummarizedExperiment}},
-#' \code{\linkS4class{ExpressionSet}}, `matrix`,
-#' \code{\link[RaggedExperiment:RaggedExperiment-class]{RaggedExperiment}}
-#' (inherits from \code{\linkS4class{GRangesList}}), and `RangedVcfStack`.
+#' [`SummarizedExperiment`],
+#' [`ExpressionSet`], `matrix`, `RaggedExperiment`
+#' (inherits from [`GRangesList`]), and `RangedVcfStack`.
 #' Create new `MultiAssayExperiment` instances with the homonymous
-#' constructor, minimally with the argument \code{\link{ExperimentList}},
+#' constructor, minimally with the argument [`ExperimentList`],
 #' potentially also with the arguments `colData` (see section below) and
-#' \code{\link{sampleMap}}.
+#' [`sampleMap`].
 #'
 #' @details
-#' The dots (\code{\ldots}) argument allows the user to specify additional
+#' The dots (`...`) argument allows the user to specify additional
 #' arguments in several instances.
-#' \itemize{
-#'     \item subsetting \strong{[}: additional arguments sent to
-#'         \link[GenomicRanges:findOverlaps-methods]{findOverlaps}.
-#'     \item mergeReplicates: used to specify arguments for the \code{simplify}
-#'         functional argument
-#'     \item assay: may contain withDimnames, which is forwarded to assays
-#'     \item combining \strong{c}: compatible \code{MultiAssayExperiment} classes
-#'         passed on to the \code{\linkS4class{ExperimentList}} constructor,
-#'         can be a \code{list}, \code{\linkS4class{List}}, or a series of
-#'         named arguments. See the examples below.
-#' }
+#' * subsetting **[**: additional arguments sent to
+#'     [`findOverlaps`][GenomicRanges::findOverlaps-methods].
+#' * mergeReplicates: used to specify arguments for the `simplify`
+#'     functional argument
+#' * assay: may contain withDimnames, which is forwarded to assays
+#' * combining **c**: compatible `MultiAssayExperiment` classes
+#'     passed on to the [`ExperimentList`] constructor,
+#'     can be a `list`, [`List`], or a series of
+#'     named arguments. See the examples below.
 #'
 #' @section colData:
 #' The `colData` slot is a collection of primary specimen data valid
 #' across all experiments. This slot is strictly of class
-#' \code{\linkS4class{DataFrame}} but arguments for the constructor function
+#' [`DataFrame`] but arguments for the constructor function
 #' allow arguments to be of class `data.frame` and subsequently coerced.
 #'
 #' @section ExperimentList:
-#' The \code{\link{ExperimentList}} slot is designed to contain results from
-#' each experiment/assay. It contains a \linkS4class{SimpleList}.
+#' The [`ExperimentList`] slot is designed to contain results from
+#' each experiment/assay. It contains a [`SimpleList`].
 #'
 #' @section sampleMap:
-#' The \code{\link{sampleMap}} contains a `DataFrame` of translatable
+#' The [`sampleMap`] contains a `DataFrame` of translatable
 #' identifiers of samples and participants or biological units. The standard
 #' column names of the `sampleMap` are "assay", "primary", and "colname".
 #' Note that the "assay" column is a factor corresponding to the names of each
@@ -73,7 +70,7 @@ NULL
 #' "assay" factor in the `sampleMap` do not match the names in the
 #' `ExperimentList`.
 #'
-#' @slot ExperimentList A \code{\link{ExperimentList}} class object for
+#' @slot ExperimentList A [`ExperimentList`] class object for
 #' each assay dataset
 #'
 #' @slot colData A `DataFrame` of all clinical/specimen data available
@@ -92,8 +89,6 @@ NULL
 #' @param ... Additional arguments for supporting functions. See details.
 #'
 #' @return A `MultiAssayExperiment` object
-#'
-#' @md
 #'
 #' @examples
 #' example("MultiAssayExperiment")
@@ -117,7 +112,7 @@ NULL
 #'
 #' @exportClass MultiAssayExperiment
 #'
-#' @seealso \link{MultiAssayExperiment-methods} for slot modifying methods,
+#' @seealso [MultiAssayExperiment-methods] for slot modifying methods,
 #'     \href{https://github.com/waldronlab/MultiAssayExperiment/wiki/MultiAssayExperiment-API}{MultiAssayExperiment API}
 #'
 #' @include ExperimentList-class.R
@@ -249,12 +244,12 @@ setClass(
 }
 
 #' Construct an integrative representation of multi-omic data with
-#' \code{MultiAssayExperiment}
+#' `MultiAssayExperiment`
 #'
-#' The constructor function for the \link{MultiAssayExperiment-class} combines
+#' The constructor function for the [MultiAssayExperiment-class] combines
 #' multiple data elements from the different hierarchies of data
 #' (study, experiments, and samples). It can create instances where neither
-#' a \code{sampleMap} or a \code{colData} set is provided. Please see the
+#' a `sampleMap` or a `colData` set is provided. Please see the
 #' MultiAssayExperiment API documentation for more information.
 #'
 #' @section colData:
@@ -263,13 +258,13 @@ setClass(
 #' the colnames in the experiments if no sampleMap is provided.
 #'
 #' @section experiments:
-#' The `experiments` input can be of class \linkS4class{SimpleList} or `list`.
-#' This input becomes the \code{\link{ExperimentList}}. Each element of the
+#' The `experiments` input can be of class [`SimpleList`] or `list`.
+#' This input becomes the [`ExperimentList`]. Each element of the
 #' input `list` or `List` must be named, rectangular with two dimensions, and
 #' have `dimnames`.
 #'
 #' @section sampleMap:
-#' The \code{\link{sampleMap}} can either be input as `DataFrame` or
+#' The [`sampleMap`] can either be input as `DataFrame` or
 #' `data.frame` with eventual coercion to `DataFrame`. The `sampleMap` relates
 #' biological units and biological measurements within each assay. Each row in
 #' the `sampleMap` is a single such link. The standard column names of the
@@ -285,28 +280,28 @@ setClass(
 #' experiments if the levels of the "assay" factor in the `sampleMap` do not
 #' match the names in the `ExperimentList`.
 #'
-#' @param experiments A \code{list} or \link{ExperimentList} of all
+#' @param experiments A `list` or [`ExperimentList`] of all
 #' combined experiments
 #'
-#' @param colData A \code{\linkS4class{DataFrame}} or \code{data.frame} of
+#' @param colData A [`DataFrame`] or \code{data.frame} of
 #' characteristics for all biological units
 #'
-#' @param sampleMap A \code{DataFrame} or \code{data.frame} of assay names,
+#' @param sampleMap A `DataFrame` or \code{data.frame} of assay names,
 #' sample identifiers, and colname samples
 #'
 #' @param metadata An optional argument of "ANY" class (usually list) for
 #' content describing the experiments
 #'
-#' @param drops A \code{list} of unmatched information
+#' @param drops A `list` of unmatched information
 #' (included after subsetting)
 #'
-#' @return A \code{MultiAssayExperiment} object that can store
+#' @return A `MultiAssayExperiment` object that can store
 #' experiment and phenotype data
 #'
 #' @example inst/scripts/MultiAssayExperiment-Ex.R
 #'
 #' @export MultiAssayExperiment
-#' @seealso \link{MultiAssayExperiment-class}
+#' @seealso [MultiAssayExperiment-class]
 MultiAssayExperiment <-
     function(
         experiments = ExperimentList(),
@@ -462,7 +457,7 @@ S4Vectors::setValidity2("MultiAssayExperiment", .validMultiAssayExperiment)
 
 #' @exportMethod show
 #' @describeIn MultiAssayExperiment Show method for a
-#' \code{MultiAssayExperiment}
+#' `MultiAssayExperiment`
 setMethod("show", "MultiAssayExperiment", function(object) {
     if (.hasOldAPI(object)) {
         stop("MultiAssayExperiment is outdated, please run updateObject()")
@@ -505,50 +500,46 @@ setMethod("show", "MultiAssayExperiment", function(object) {
 #' @title Accessing and modifying information in MultiAssayExperiment
 #'
 #' @description A set of accessor and setter generic functions to extract
-#' either the \code{sampleMap}, the \code{\link{ExperimentList}},
-#' \code{colData}, or \code{metadata} slots of a
-#' \code{\link{MultiAssayExperiment}} object
+#' either the `sampleMap`, the [`ExperimentList`],
+#' `colData`, or `metadata` slots of a
+#' [`MultiAssayExperiment`] object
 #'
 #' @section Accessors:
-#' Eponymous names for accessing \code{MultiAssayExperiment} slots with the
-#' exception of the \link{ExperimentList} accessor named \code{experiments}.
-#' \itemize{
-#'    \item colData: Access the \code{colData} slot
-#'    \item sampleMap: Access the \code{sampleMap} slot
-#'    \item experiments: Access the \link{ExperimentList} slot
-#'    \item `[[`: Access the \link{ExperimentList} slot
-#'    \item `$`: Access a column in \code{colData}
-#'    \item `drops`: Get a vector of dropped \link{ExperimentList} names
-#' }
+#' Eponymous names for accessing `MultiAssayExperiment` slots with the
+#' exception of the [`ExperimentList`] accessor named `experiments`.
+#' * colData: Access the `colData` slot
+#' * sampleMap: Access the `sampleMap` slot
+#' * experiments: Access the [`ExperimentList`] slot
+#' * `[[`: Access the [`ExperimentList`] slot
+#' * `$`: Access a column in `colData`
+#' * `drops`: Get a vector of dropped [`ExperimentList`] names
 #'
 #' @section Setters:
 #' Setter method values (i.e., '\code{function(x) <- value}'):
-#' \itemize{
-#'     \item experiments<-: An \code{\link{ExperimentList}} object
+#' * experiments<-: An [`ExperimentList`] object
 #'     containing experiment data of supported classes
-#'     \item sampleMap<-: A \code{\link{DataFrame}} object relating
+#' * sampleMap<-: A [`DataFrame`] object relating
 #'     samples to biological units and assays
-#'     \item colData<-: A \code{\link{DataFrame}} object describing the
+#' * colData<-: A [`DataFrame`] object describing the
 #'     biological units
-#'     \item metadata<-: A \code{list} object of metadata
-#'     \item `[[<-`: Equivalent to the \code{experiments<-} setter method for
+#' * metadata<-: A `list` object of metadata
+#' * `[[<-`: Equivalent to the \code{experiments<-} setter method for
 #'     convenience
-#'     \item `$<-`: A vector to replace the indicated column in \code{colData}
-#'     \item `drops<-`: Trace \link{ExperimentList} names that have been
+#' * `$<-`: A vector to replace the indicated column in `colData`
+#' * `drops<-`: Trace [`ExperimentList`] names that have been
 #'     removed
-#' }
 #'
-#' @param object,x A \code{MultiAssayExperiment} object
+#' @param object,x A `MultiAssayExperiment` object
 #'
-#' @param name A column in \code{colData}
+#' @param name A column in `colData`
 #'
 #' @param value See details.
 #'
 #' @param ... Argument not in use
 #'
-#' @return Accessors: Either a \code{sampleMap}, \code{ExperimentList}, or
-#' \code{DataFrame} object
-#' @return Setters: A \code{MultiAssayExperiment} object
+#' @return Accessors: Either a `sampleMap`, `ExperimentList`, or
+#' `DataFrame` object
+#' @return Setters: A `MultiAssayExperiment` object
 #'
 #' @example inst/scripts/MultiAssayExperiment-methods-Ex.R
 #'
@@ -912,20 +903,18 @@ setMethod("updateObject", "MultiAssayExperiment",
 #' @section
 #' coercion:
 #'   Convert a `list` or S4 `List` to a MultiAssayExperiment object using the
-#'   \link[methods]{as} function.
+#'   [methods::as] function.
 #'
-#' In the following example, `x` is either a `list` or \linkS4class{List}:
+#' In the following example, `x` is either a `list` or [`List`]:
 #'
 #'   `as(x, "MultiAssayExperiment")`
 #'
 #'   Convert a `MultiAssayExperiment` to `MAF` class object using the
-#'   \link[methods]{as} function.
+#'   [methods::as] function.
 #'
-#' In the following example, `x` is a \linkS4class{MultiAssayExperiment}:
+#' In the following example, `x` is a `MultiAssayExperiment`:
 #'
 #'   `MultiAssayExperimentToMAF(x)`
-#'
-#' @md
 #'
 #' @exportMethod coerce
 

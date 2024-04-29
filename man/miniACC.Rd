@@ -7,21 +7,21 @@
 \format{
 A \code{MultiAssayExperiment} with 5 experiments, providing:
 \describe{
-    \item{RNASeq2GeneNorm}{RNA-seq count data: an \code{ExpressionSet}
-    with 198 rows and 79 columns}
-    \item{gistict}{Reccurent copy number lesions identified by GISTIC2:
-    a \code{SummarizedExperiment} with 198 rows and 90 columns}
-    \item{RPPAArray}{Reverse Phase Protein Array: an \code{ExpressionSet}
-    with 33 rows and 46 columns. Rows are indexed by genes,
-    but protein annotations are available from
-    \code{featureData(miniACC[["RPPAArray"]])}. The source of these
-    annotations is noted in \code{abstract(miniACC[["RPPAArray"]])}}
-    \item{Mutations}{Somatic mutations: a \code{matrix} with 223 rows and
-    90 columns. 1 for any kind of non-silent mutation, zero for silent
-    (synonymous) or no mutation.}
-    \item{miRNASeqGene}{microRNA sequencing: an \code{ExpressionSet} with
-    471 rows and 80 columns. Rows not having at least 5 counts in at least
-    5 samples were removed.}
+\item{RNASeq2GeneNorm}{RNA-seq count data: an \code{ExpressionSet}
+with 198 rows and 79 columns}
+\item{gistict}{Reccurent copy number lesions identified by GISTIC2:
+a \code{SummarizedExperiment} with 198 rows and 90 columns}
+\item{RPPAArray}{Reverse Phase Protein Array: an \code{ExpressionSet}
+with 33 rows and 46 columns. Rows are indexed by genes,
+but protein annotations are available from
+\code{featureData(miniACC[["RPPAArray"]])}. The source of these
+annotations is noted in \code{abstract(miniACC[["RPPAArray"]])}}
+\item{Mutations}{Somatic mutations: a \code{matrix} with 223 rows and
+90 columns. 1 for any kind of non-silent mutation, zero for silent
+(synonymous) or no mutation.}
+\item{miRNASeqGene}{microRNA sequencing: an \code{ExpressionSet} with
+471 rows and 80 columns. Rows not having at least 5 counts in at least
+5 samples were removed.}
 }
 }
 \source{
@@ -57,7 +57,7 @@ wideFormat(
 
 }
 \references{
-Zheng S *et al.*: Comprehensive Pan-Genomic Characterization of
+Zheng S \emph{et al.}: Comprehensive Pan-Genomic Characterization of
 Adrenocortical Carcinoma. Cancer Cell 2016, 29:723-736.
 }
 \author{

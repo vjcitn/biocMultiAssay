@@ -56,7 +56,7 @@
 
 \item{...}{Additional arguments for supporting functions. See details.}
 
-\item{verbose}{logical(1) Whether to print additional information (default
+\item{verbose}{\code{logical(1)} Whether to print additional information (default
 TRUE)}
 
 \item{sampleMap}{\code{c} method: a \code{sampleMap} \code{list} or
@@ -67,16 +67,16 @@ vector indicating the experiment(s) that have an identical colname order as
 the experiment input(s). If using a character input, the name must match
 exactly.}
 
-\item{dir}{character(1) A directory for saving exported data (default:
-`tempdir()`)}
+\item{dir}{\code{character(1)} A directory for saving exported data (default:
+\code{tempdir()})}
 
-\item{fmt}{character(1) or function() Either a format character atomic as
-supported by `write.table` either ('csv', or 'tsv') or a function whose
+\item{fmt}{\code{character(1)} or function() Either a format character atomic as
+supported by \code{write.table} either ('csv', or 'tsv') or a function whose
 first two arguments are 'object to save' and 'file location'}
 
-\item{ext}{character(1) A file extension supported by the format argument}
+\item{ext}{\code{character(1)} A file extension supported by the format argument}
 
-\item{match}{logical(1) Whether to coerce the current object to a
+\item{match}{\code{logical(1)} Whether to coerce the current object to a
 'MatchedAssayExperiment' object (default: FALSE)}
 
 \item{withDimnames}{logical (default TRUE) whether to return dimension names
@@ -91,27 +91,26 @@ A \code{MultiAssayExperiment} object
 The \code{MultiAssayExperiment} class can be used to manage results of
 diverse assays on a collection of specimen. Currently,  the class can handle
 assays that are organized instances of
-\code{\linkS4class{SummarizedExperiment}},
-\code{\linkS4class{ExpressionSet}}, \code{matrix},
-\code{\link[RaggedExperiment:RaggedExperiment-class]{RaggedExperiment}}
-(inherits from \code{\linkS4class{GRangesList}}), and \code{RangedVcfStack}.
+\code{\link{SummarizedExperiment}},
+\code{\link{ExpressionSet}}, \code{matrix}, \code{RaggedExperiment}
+(inherits from \code{\link{GRangesList}}), and \code{RangedVcfStack}.
 Create new \code{MultiAssayExperiment} instances with the homonymous
 constructor, minimally with the argument \code{\link{ExperimentList}},
 potentially also with the arguments \code{colData} (see section below) and
 \code{\link{sampleMap}}.
 }
 \details{
-The dots (\code{\ldots}) argument allows the user to specify additional
+The dots (\code{...}) argument allows the user to specify additional
 arguments in several instances.
 \itemize{
 \item subsetting \strong{[}: additional arguments sent to
-\link[GenomicRanges:findOverlaps-methods]{findOverlaps}.
+\code{\link[GenomicRanges:findOverlaps-methods]{findOverlaps}}.
 \item mergeReplicates: used to specify arguments for the \code{simplify}
 functional argument
 \item assay: may contain withDimnames, which is forwarded to assays
 \item combining \strong{c}: compatible \code{MultiAssayExperiment} classes
-passed on to the \code{\linkS4class{ExperimentList}} constructor,
-can be a \code{list}, \code{\linkS4class{List}}, or a series of
+passed on to the \code{\link{ExperimentList}} constructor,
+can be a \code{list}, \code{\link{List}}, or a series of
 named arguments. See the examples below.
 }
 }
@@ -140,8 +139,8 @@ of text files
 data for all available experiments in the object
 
 \item \code{assay(x = MultiAssayExperiment, i = missing)}: Convenience function for extracting the
-assay of the first element (default) in the \code{ExperimentList}. A
-\code{numeric} or \code{character} index can also be provided
+assay of the first element (default) in the \code{ExperimentList}. A \code{numeric}
+or \code{character} index can also be provided
 
 }}
 \section{Slots}{
@@ -166,14 +165,14 @@ of samples and participants}
 
 The \code{colData} slot is a collection of primary specimen data valid
 across all experiments. This slot is strictly of class
-\code{\linkS4class{DataFrame}} but arguments for the constructor function
+\code{\link{DataFrame}} but arguments for the constructor function
 allow arguments to be of class \code{data.frame} and subsequently coerced.
 }
 
 \section{ExperimentList}{
 
 The \code{\link{ExperimentList}} slot is designed to contain results from
-each experiment/assay. It contains a \linkS4class{SimpleList}.
+each experiment/assay. It contains a \code{\link{SimpleList}}.
 }
 
 \section{sampleMap}{
@@ -197,16 +196,16 @@ An empty \code{sampleMap} may produce empty experiments if the levels of the
 \section{coercion}{
 
 Convert a \code{list} or S4 \code{List} to a MultiAssayExperiment object using the
-\link[methods]{as} function.
+\link[methods:as]{methods::as} function.
 
-In the following example, \code{x} is either a \code{list} or \linkS4class{List}:
+In the following example, \code{x} is either a \code{list} or \code{\link{List}}:
 
 \code{as(x, "MultiAssayExperiment")}
 
 Convert a \code{MultiAssayExperiment} to \code{MAF} class object using the
-\link[methods]{as} function.
+\link[methods:as]{methods::as} function.
 
-In the following example, \code{x} is a \linkS4class{MultiAssayExperiment}:
+In the following example, \code{x} is a \code{MultiAssayExperiment}:
 
 \code{MultiAssayExperimentToMAF(x)}
 }

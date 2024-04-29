@@ -54,6 +54,7 @@ VignetteBuilder:
 biocViews: Infrastructure, DataRepresentation
 Encoding: UTF-8
 RoxygenNote: 7.3.1
+Roxygen: list(markdown = TRUE)
 Video: https://youtu.be/w6HWAHaDpyk, https://youtu.be/Vh0hVVUKKFM
 Collate: 
     'ExperimentList-class.R'

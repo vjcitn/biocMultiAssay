@@ -56,7 +56,7 @@ NULL
 ###
 
 #' @describeIn ExperimentList Get the dimension names for
-#' an \code{ExperimentList} using \code{\linkS4class{CharacterList}}
+#' an `ExperimentList` using [`CharacterList`]
 #' @importFrom methods as
 #' @export
 setMethod("dimnames", "ExperimentList", function(x) {
@@ -66,8 +66,8 @@ setMethod("dimnames", "ExperimentList", function(x) {
     )
 })
 
-#' @describeIn ExperimentList Get the column names for an \code{ExperimentList}
-#'   as a \code{\linkS4class{CharacterList}} slightly more efficiently
+#' @describeIn ExperimentList Get the column names for an `ExperimentList`
+#'   as a [`CharacterList`] slightly more efficiently
 #'
 #' @importFrom BiocGenerics colnames
 #' @inheritParams BiocGenerics::colnames
@@ -79,8 +79,8 @@ setMethod("colnames", "ExperimentList",
     }
 )
 
-#' @describeIn ExperimentList Get the row names for an \code{ExperimentList}
-#'   as a \code{\linkS4class{CharacterList}} slightly more efficiently
+#' @describeIn ExperimentList Get the row names for an `ExperimentList`
+#'   as a [`CharacterList`] slightly more efficiently
 #'
 #' @importFrom BiocGenerics rownames
 #' @export
@@ -91,7 +91,7 @@ setMethod("rownames", "ExperimentList",
 )
 
 #' @describeIn MultiAssayExperiment Get the dimension names
-#' for a \code{MultiAssayExperiment} object
+#' for a `MultiAssayExperiment` object
 setMethod("dimnames", "MultiAssayExperiment", function(x) {
     dimnames(experiments(x))
 })
@@ -153,11 +153,11 @@ setReplaceMethod("metadata", c("MultiAssayExperiment", "ANY"),
 }
 
 #' @describeIn MultiAssayExperiment Add a supported data class to the
-#' \code{ExperimentList}
+#' `ExperimentList`
 #'
-#' @param sampleMap \code{c} method: a \code{sampleMap} \code{list} or
-#' \code{DataFrame} to guide merge
-#' @param mapFrom Either a \code{logical}, \code{character}, or \code{integer}
+#' @param sampleMap `c` method: a `sampleMap` `list` or
+#' `DataFrame` to guide merge
+#' @param mapFrom Either a `logical`, `character`, or `integer`
 #' vector indicating the experiment(s) that have an identical colname order as
 #' the experiment input(s). If using a character input, the name must match
 #' exactly.
@@ -292,19 +292,19 @@ setGeneric(
 #' @describeIn MultiAssayExperiment Export data from class to a series
 #'     of text files
 #'
-#' @param dir character(1) A directory for saving exported data (default:
+#' @param dir `character(1)` A directory for saving exported data (default:
 #'     `tempdir()`)
 #'
-#' @param fmt character(1) or function() Either a format character atomic as
+#' @param fmt `character(1)` or function() Either a format character atomic as
 #'     supported by `write.table` either ('csv', or 'tsv') or a function whose
 #'     first two arguments are 'object to save' and 'file location'
 #'
-#' @param ext character(1) A file extension supported by the format argument
+#' @param ext `character(1)` A file extension supported by the format argument
 #'
-#' @param match logical(1) Whether to coerce the current object to a
+#' @param match `logical(1)` Whether to coerce the current object to a
 #'     'MatchedAssayExperiment' object (default: FALSE)
 #'
-#' @param verbose logical(1) Whether to print additional information (default
+#' @param verbose `logical(1)` Whether to print additional information (default
 #'     TRUE)
 #'
 #' @aliases exportClass

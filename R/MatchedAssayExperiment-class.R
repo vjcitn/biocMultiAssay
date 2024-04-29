@@ -11,10 +11,10 @@ NULL
 #' This class supports the use of matched samples where an equal number
 #' of observations per biological unit are present in all assays.
 #'
-#' @return A \code{MatchedAssayExperiment} object
+#' @return A `MatchedAssayExperiment` object
 #'
 #' @exportClass MatchedAssayExperiment
-#' @seealso \link{MultiAssayExperiment}
+#' @seealso [`MultiAssayExperiment`]
 #'
 setClass("MatchedAssayExperiment", contains="MultiAssayExperiment")
 
@@ -65,7 +65,7 @@ S4Vectors::setValidity2("MatchedAssayExperiment", .validMatchedAssayExperiment)
 }
 
 #' @describeIn MatchedAssayExperiment-class Construct a
-#' \code{MatchedAssayExperiment} class from \linkS4class{MultiAssayExperiment}
+#' `MatchedAssayExperiment` class from [`MultiAssayExperiment`]
 #'
 #' @param ... Either a single MultiAssayExperiment or the components to create
 #' a valid MultiAssayExperiment

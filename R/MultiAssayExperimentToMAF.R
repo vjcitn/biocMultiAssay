@@ -16,14 +16,12 @@
 #'
 #' @param x A `MultiAssayExperiment` object
 #'
-#' @param synAssay character(1) The name of the `ExperimentList` element in the
+#' @param synAssay `character(1)` The name of the `ExperimentList` element in the
 #'   `MultiAssayExperiment` that identifies synonymous variant classifications.
 #'
-#' @param nonSynAssay character(1) The name of the `ExperimentList` element in
+#' @param nonSynAssay `character(1)` The name of the `ExperimentList` element in
 #'   the `MultiAssayExperiment` that identifies non-synonymous variant
 #'   classifications.
-#'
-#' @md
 #'
 #' @export
 MultiAssayExperimentToMAF <-

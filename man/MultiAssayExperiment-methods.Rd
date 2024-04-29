@@ -91,14 +91,14 @@ either the \code{sampleMap}, the \code{\link{ExperimentList}},
 \section{Accessors}{
 
 Eponymous names for accessing \code{MultiAssayExperiment} slots with the
-exception of the \link{ExperimentList} accessor named \code{experiments}.
+exception of the \code{\link{ExperimentList}} accessor named \code{experiments}.
 \itemize{
-   \item colData: Access the \code{colData} slot
-   \item sampleMap: Access the \code{sampleMap} slot
-   \item experiments: Access the \link{ExperimentList} slot
-   \item `[[`: Access the \link{ExperimentList} slot
-   \item `$`: Access a column in \code{colData}
-   \item `drops`: Get a vector of dropped \link{ExperimentList} names
+\item colData: Access the \code{colData} slot
+\item sampleMap: Access the \code{sampleMap} slot
+\item experiments: Access the \code{\link{ExperimentList}} slot
+\item \code{[[}: Access the \code{\link{ExperimentList}} slot
+\item \code{$}: Access a column in \code{colData}
+\item \code{drops}: Get a vector of dropped \code{\link{ExperimentList}} names
 }
 }
 
@@ -106,18 +106,18 @@ exception of the \link{ExperimentList} accessor named \code{experiments}.
 
 Setter method values (i.e., '\code{function(x) <- value}'):
 \itemize{
-    \item experiments<-: An \code{\link{ExperimentList}} object
-    containing experiment data of supported classes
-    \item sampleMap<-: A \code{\link{DataFrame}} object relating
-    samples to biological units and assays
-    \item colData<-: A \code{\link{DataFrame}} object describing the
-    biological units
-    \item metadata<-: A \code{list} object of metadata
-    \item `[[<-`: Equivalent to the \code{experiments<-} setter method for
-    convenience
-    \item `$<-`: A vector to replace the indicated column in \code{colData}
-    \item `drops<-`: Trace \link{ExperimentList} names that have been
-    removed
+\item experiments<-: An \code{\link{ExperimentList}} object
+containing experiment data of supported classes
+\item sampleMap<-: A \code{\link{DataFrame}} object relating
+samples to biological units and assays
+\item colData<-: A \code{\link{DataFrame}} object describing the
+biological units
+\item metadata<-: A \code{list} object of metadata
+\item \verb{[[<-}: Equivalent to the \code{experiments<-} setter method for
+convenience
+\item \verb{$<-}: A vector to replace the indicated column in \code{colData}
+\item \verb{drops<-}: Trace \code{\link{ExperimentList}} names that have been
+removed
 }
 }
 

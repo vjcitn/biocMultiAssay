@@ -20,10 +20,10 @@ saveHDF5MultiAssayExperiment(
 loadHDF5MultiAssayExperiment(dir = "h5_mae", prefix = NULL)
 }
 \arguments{
-\item{x}{A \linkS4class{MultiAssayExperiment} object or derivative}
+\item{x}{A \code{\link{MultiAssayExperiment}} object or derivative}
 
 \item{dir}{The path (as a single string) to the directory where to save the
-HDF5-based \linkS4class{MultiAssayExperiment} object or to load it from.
+HDF5-based \code{\link{MultiAssayExperiment}} object or to load it from.
 
 When saving, the directory will be created if it doesn't already exist.
 If the directory already exists and no prefix is specified and
@@ -75,7 +75,7 @@ functionality to obtain data matrices out of the experiments. These are
 then saved into the \code{.h5} file format. This function relies heavily on
 the \code{HDF5Array} package whose installation is required before use.
 \code{saveHDF5MultiAssayExpeirment} preserves the classes contained in the
-\linkS4class{ExperimentList} with the exception of \code{matrix} which is
+\code{\link{ExperimentList}} with the exception of \code{matrix} which is
 converted to \code{HDF5Matrix}. Internal \code{SummarizedExperiment} assays are
 converted to HDF5-backed assays as in
 \code{HDF5Array::saveHDF5SummarizedExperiment}. \code{SummarizedExperiment}

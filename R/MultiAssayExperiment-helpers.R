@@ -13,55 +13,51 @@ NULL
 #' manipulate a MultiAssayExperiment object. `intersectRows` also works
 #' for `ExperimentList` objects.
 #'
-#' \itemize{
-#'     \item complete.cases: Returns a logical vector corresponding to 'colData'
+#' * complete.cases: Returns a logical vector corresponding to 'colData'
 #'     rows that have data across all experiments
-#'     \item isEmpty: Returns a logical `TRUE` value for zero length
+#' * isEmpty: Returns a logical `TRUE` value for zero length
 #'     `MultiAssayExperiment` objects
-#'     \item intersectRows: Takes all common rows across experiments,
+#' * intersectRows: Takes all common rows across experiments,
 #'     excludes experiments with empty rownames
-#'     \item intersectColumns: A wrapper for `complete.cases` to return a
+#' * intersectColumns: A wrapper for `complete.cases` to return a
 #'     `MultiAssayExperiment` with only those biological units that have
 #'     measurements across all experiments
-#'     \item replicated: Identifies, via logical vectors, `colname`s that
+#' * replicated: Identifies, via logical vectors, `colname`s that
 #'     originate from a single biological unit within each assay
-#'     \item replicates: Provides the replicate `colname`s found with
+#' * replicates: Provides the replicate `colname`s found with
 #'     the `replicated` function by their name, empty list if none
-#'     \item anyReplicated: Whether the assay has replicate measurements
-#'     \item showReplicated: Displays the actual columns that are replicated per
-#'     assay and biological unit, i.e., \code{primary} value (\code{colData}
+#' * anyReplicated: Whether the assay has replicate measurements
+#' * showReplicated: Displays the actual columns that are replicated per
+#'     assay and biological unit, i.e., `primary` value (`colData`
 #'     rowname) in the `sampleMap`
-#'     \item mergeReplicates: A function that combines replicated / repeated
+#' * mergeReplicates: A function that combines replicated / repeated
 #'     measurements across all experiments and is guided by the replicated
 #'     return value
-#'     \item longFormat: A `MultiAssayExperiment` method that
-#'     returns a small and skinny \link{DataFrame}. The `colDataCols`
+#' * longFormat: A `MultiAssayExperiment` method that
+#'     returns a small and skinny [`DataFrame`]. The `colDataCols`
 #'     arguments allows the user to append `colData` columns to the data.
-#'     \item wideFormat: A function to reshape the data in a
-#'     `MultiAssayExperiment` to a "wide" format \link{DataFrame}. Each row in
+#' * wideFormat: A function to reshape the data in a
+#'     `MultiAssayExperiment` to a "wide" format [`DataFrame`]. Each row in
 #'     the `DataFrame` represents an observation (corresponding to an entry in
 #'     the `colData`). If replicates are present, their data will be appended at
 #'     the end of the corresponding row and will generate additional `NA` data.
 #'     It is recommended to remove or consolidate technical replicates with
 #'     `mergeReplicates`. Optional `colDataCols` can be added when the
 #'     original object is a `MultiAssayExperiment`.
-#'     \item hasRowRanges: A function that identifies ExperimentList elements
-#'     that have a \link[=RangedSummarizedExperiment-class]{rowRanges} method
-#'     \item getWithColData: A convenience function for extracting an assay
+#' * hasRowRanges: A function that identifies ExperimentList elements
+#'     that have a [`rowRanges`][RangedSummarizedExperiment-class] method
+#' * getWithColData: A convenience function for extracting an assay
 #'     and associated colData
-#'     \item renamePrimary: A convenience function to rename the primary
+#' * renamePrimary: A convenience function to rename the primary
 #'     biological units as represented in the `rownames(colData)`
-#'     \item renameColname: A convenience function to rename the colnames
+#' * renameColname: A convenience function to rename the colnames
 #'     of a particular assay
-#' }
 #'
 #' @param x A MultiAssayExperiment or ExperimentList
 #'
 #' @param ... Additional arguments. See details for more information.
 #'
 #' @return See the itemized list in the description section for details.
-#'
-#' @md
 #'
 #' @examples
 #'
@@ -115,9 +111,9 @@ setGeneric("replicated", function(x) standardGeneric("replicated"))
 #' @rdname MultiAssayExperiment-helpers
 #'
 #' @details The `replicated` function finds replicate measurements in each
-#' assay and returns a list of \linkS4class{LogicalList}s.
-#' Each element in a single \linkS4class{LogicalList} corresponds to a
-#' biological or \emph{primary} unit as in the `sampleMap`. Below is a
+#' assay and returns a list of [`LogicalList`]s.
+#' Each element in a single [`LogicalList`] corresponds to a
+#' biological or _primary_ unit as in the `sampleMap`. Below is a
 #' small graphic for one particular biological unit in one assay, where the
 #' logical vector corresponds to the number of measurements/samples in the
 #' assay:
@@ -128,11 +124,11 @@ setGeneric("replicated", function(x) standardGeneric("replicated"))
 #'  Replicated if sum(...) > 1          '-- TRUE TRUE FALSE FALSE
 #' }
 #' `anyReplicated` determines if any of the assays have at least one
-#' replicate. \emph{Note}. These methods are not available for the
-#' \code{ExperimentList} class due to a missing \code{sampleMap} structure
+#' replicate. _Note_. These methods are not available for the
+#' `ExperimentList` class due to a missing `sampleMap` structure
 #' (by design).
-#' \code{showReplicated} returns a list of \linkS4class{CharacterList}s where
-#' each element corresponds to the the biological or \emph{primary} units that
+#' `showReplicated` returns a list of [`CharacterList`]s where
+#' each element corresponds to the the biological or _primary_ units that
 #' are replicated in that assay element. The values in the inner list are
 #' the `colnames` in the assay that are technical replicates.
 #'
@@ -190,9 +186,9 @@ setGeneric("replicates", function(x, ...) standardGeneric("replicates"))
 
 #' @rdname MultiAssayExperiment-helpers
 #'
-#' @details The \code{replicates} function (noun) returns the \code{colname}s
+#' @details The `replicates` function (noun) returns the `colname`s
 #'   from the `sampleMap` that were identified as replicates. It returns a
-#'   list of \linkS4class{CharacterList}s for each assay present in the
+#'   list of [`CharacterList`]s for each assay present in the
 #'   `MultiAssayExperiment` and an inner entry for each biological unit
 #'   that has replicate observations in that assay.
 #'
@@ -225,11 +221,11 @@ setGeneric("mergeReplicates",
 #' @rdname MultiAssayExperiment-helpers
 #'
 #' @details The `mergeReplicates` function is a house-keeping method
-#' for a \code{MultiAssayExperiment} where only \code{complete.cases} are
+#' for a `MultiAssayExperiment` where only `complete.cases` are
 #' returned. This by-assay operation averages replicate measurements
 #' (by default) and columns are aligned by the row order in `colData`.
 #' Users can provide their own function for merging replicates with the
-#' \code{simplify} functional argument. Additional inputs \code{\ldots} are
+#' `simplify` functional argument. Additional inputs `...` are
 #' sent to the 'simplify' function.
 #'
 #' @section mergeReplicates:
@@ -238,17 +234,17 @@ setGeneric("mergeReplicates",
 #' biological unit in the `MultiAssayExperiment`. This function will
 #' return a `MultiAssayExperiment` with merged replicates. Additional
 #' arguments can be provided to the simplify argument via the ellipsis
-#' (\ldots). For example, when replicates "TCGA-B" and "TCGA-A" are found in
+#' (`...`). For example, when replicates "TCGA-B" and "TCGA-A" are found in
 #' the assay, the name of the first appearing replicate is taken (i.e., "B").
 #' Note that a typical use case of merging replicates occurs when there are
-#' multiple measurements on the \strong{same} sample (within the same assay)
+#' multiple measurements on the **same** sample (within the same assay)
 #' and can therefore be averaged.
 #'
-#' @param replicates A list of \linkS4class{LogicalList}s
+#' @param replicates A list of [`LogicalList`]s
 #' indicating multiple / duplicate entries for each biological unit per assay,
-#' see \code{replicated} (default \code{replicated(x)}).
+#' see `replicated` (default `replicated(x)`).
 #' @param simplify A function for merging repeat measurements in experiments
-#' as indicated by the \code{replicated} method for \code{MultiAssayExperiment}
+#' as indicated by the `replicated` method for `MultiAssayExperiment`
 #'
 #' @exportMethod mergeReplicates
 setMethod("mergeReplicates", "MultiAssayExperiment",
@@ -268,7 +264,7 @@ setMethod("mergeReplicates", "MultiAssayExperiment",
 #' @describeIn ExperimentList Apply the mergeReplicates method on the
 #' ExperimentList elements
 #'
-#' @param replicates mergeReplicates: A \code{list} or \linkS4class{LogicalList}
+#' @param replicates mergeReplicates: A `list` or [`LogicalList`]
 #' where each element represents a sample and a vector of repeated measurements
 #' for the sample
 #'
@@ -295,7 +291,7 @@ setMethod("mergeReplicates", "ExperimentList",
 #'
 #' @details The `mergeReplicates` "ANY" method consolidates duplicate
 #' measurements for rectangular data structures, returns object of the same
-#' class (endomorphic). The ellipsis or `\ldots` argument allows the
+#' class (endomorphic). The ellipsis or `...` argument allows the
 #' user to provide additional arguments to the `simplify` functional
 #' argument.
 setMethod("mergeReplicates", "ANY",
@@ -403,34 +399,34 @@ setMethod("mergeReplicates", "ANY",
 #' @aliases longFormat
 #'
 #' @details The `longFormat` "ANY" class method, works with classes such as
-#' \link{ExpressionSet} and \link{SummarizedExperiment} as well as `matrix`
-#' to provide a consistent long and skinny \link{DataFrame}.
+#' [`ExpressionSet`] and [`SummarizedExperiment`] as well as `matrix`
+#' to provide a consistent long and skinny [`DataFrame`].
 #'
 #' @section longFormat:
-#' The 'longFormat' method takes data from the \code{\link{ExperimentList}}
-#' in a \code{\link{MultiAssayExperiment}} and returns a uniform
-#' \code{\link{DataFrame}}. The resulting DataFrame has columns indicating
+#' The 'longFormat' method takes data from the [`ExperimentList`]
+#' in a `MultiAssayExperiment` and returns a uniform
+#' `DataFrame`. The resulting DataFrame has columns indicating
 #' primary, rowname, colname and value. This method can optionally include
 #' columns of the MultiAssayExperiment colData named by `colDataCols` character
-#' vector argument. (\code{MultiAssayExperiment} method only). The \code{i} argument
+#' vector argument. (`MultiAssayExperiment` method only). The `i` argument
 #' allows the user to specify the assay value for the
-#' \linkS4class{SummarizedExperiment} assay function's `i` argument.
+#' `SummarizedExperiment` assay function's `i` argument.
 #'
 #' @param object Any supported class object
 #'
-#' @param colDataCols A \code{character}, \code{logical}, or \code{numeric}
+#' @param colDataCols A `character`, `logical`, or `numeric`
 #'     index for `colData` columns to be included
 #'
 #' @param i longFormat: The i-th assay in
-#'     \linkS4class{SummarizedExperiment}-like objects. A vector input is
-#'     supported in the case that the SummarizedExperiment object(s) has more
+#'     `SummarizedExperiment`-like objects. A vector input is
+#'     supported in the case that the `SummarizedExperiment` object(s) has more
 #'     than one assay (default 1L),
-#'     renameColname: Either a \code{numeric} or \code{character} index
+#'     renameColname: Either a `numeric` or `character` index
 #'     indicating the assay whose colnames are to be renamed
 #'
-#' @param mode String indicating how \linkS4class{MultiAssayExperiment}
+#' @param mode String indicating how `MultiAssayExperiment`
 #'     column-level metadata should be added to the
-#'     \linkS4class{SummarizedExperiment} `colData`.
+#'     `SummarizedExperiment` `colData`.
 #'
 #' @export longFormat
 longFormat <- function(object, colDataCols = NULL, i = 1L) {
@@ -507,14 +503,14 @@ longFormat <- function(object, colDataCols = NULL, i = 1L) {
 #' @rdname MultiAssayExperiment-helpers
 #'
 #' @section wideFormat:
-#' The \code{wideFormat} function returns standardized wide \link{DataFrame}
+#' The `wideFormat` function returns standardized wide [`DataFrame`]
 #' where each row represents a biological unit as in the `colData`.
 #' Depending on the data and setup, biological units can be patients, tumors,
 #' specimens, etc. Metadata columns are
 #' generated based on the names produced in the wide format
-#' \linkS4class{DataFrame}. These can be accessed via the
-#' \link[=Vector-class]{mcols} function.
-#' See the \code{wideFormat} section for description of the \code{colDataCols} and
+#' `DataFrame`. These can be accessed via the
+#' [`mcols()`][S4Vectors::Vector-class] function.
+#' See the `wideFormat` section for description of the `colDataCols` and
 #' `i` arguments.
 #'
 #' @param check.names (logical default TRUE) Column names of the output
@@ -610,7 +606,7 @@ wideFormat <- function(object, colDataCols = NULL, check.names = TRUE,
 #' @section hasRowRanges:
 #' The `hasRowRanges` method identifies assays with associated ranged
 #' row data by directly testing the method on the object. The result from the
-#' test must be a \linkS4class{GRanges} class object to satisfy the test.
+#' test must be a [`GRanges`] class object to satisfy the test.
 #'
 #' @export hasRowRanges
 setGeneric("hasRowRanges", function(x) standardGeneric("hasRowRanges"))
@@ -618,8 +614,8 @@ setGeneric("hasRowRanges", function(x) standardGeneric("hasRowRanges"))
 #' @rdname MultiAssayExperiment-helpers
 #'
 #' @details The `hasRowRanges` method identifies assays that support
-#' a \link[=RangedSummarizedExperiment-class]{rowRanges} method \emph{and}
-#' return a \linkS4class{GRanges} object.
+#' a [`rowRanges`][RangedSummarizedExperiment-class] method _and_
+#' return a [`GRanges`] object.
 setMethod("hasRowRanges", "MultiAssayExperiment", function(x) {
     hasRowRanges(experiments(x))
 })
@@ -632,29 +628,28 @@ setMethod("hasRowRanges", "ExperimentList", function(x) {
 
 #' @rdname MultiAssayExperiment-helpers
 #'
-#' @param verbose logical(1) Whether to `suppressMessages` on subsetting
+#' @param verbose `logical(1)` Whether to `suppressMessages` on subsetting
 #'     operations in `getWithColData` (default FALSE)
 #'
 #' @aliases getWithColData
 #'
 #' @section getWithColData:
 #' The `getWithColData` function allows the user to conveniently extract
-#' a particular assay as indicated by the \strong{\code{i}} index argument. It
+#' a particular assay as indicated by the **`i`** index argument. It
 #' will also attempt to provide the
-#' \code{\link[=SummarizedExperiment-class]{colData}} along with the
-#' extracted object using the `colData<-` replacement
+#' [`colData`][SummarizedExperiment::SummarizedExperiment-class]
+#' along with the extracted object using the `colData<-` replacement
 #' method when possible. Typically, this method is available for
-#' \linkS4class{SummarizedExperiment} and `RaggedExperiment`
-#' classes.
+#' [`SummarizedExperiment`] and `RaggedExperiment` classes.
 #'
-#' The setting of \code{mode} determines how the \code{\link{colData}}
-#' is added. If \code{mode="append"}, the \linkS4class{MultiAssayExperiment}
-#' metadata is appended onto that of the \linkS4class{SummarizedExperiment}.
+#' The setting of `mode` determines how the `colData`
+#' is added. If `mode="append"`, the `MultiAssayExperiment`
+#' metadata is appended onto that of the `SummarizedExperiment`.
 #' If any fields are duplicated by name, the values in the
-#' \linkS4class{SummarizedExperiment} are retained, with a warning emitted if
+#' `SummarizedExperiment` are retained, with a warning emitted if
 #' the values are different.  For `mode="replace"`, the
-#' \linkS4class{MultiAssayExperiment} metadata replaces that of the
-#' \linkS4class{SummarizedExperiment}, while for `mode="none"`,
+#' `MultiAssayExperiment` metadata replaces that of the
+#' `SummarizedExperiment`, while for `mode="none"`,
 #' no replacement or appending is performed.
 #'
 #' @export getWithColData
@@ -790,16 +785,16 @@ renameColname <- function(x, i, value) {
 #'
 #' @section splitAssays:
 #' The `splitAssays` method separates columns in each of the assays based
-#' on the \code{hitList} input. The \code{hitList} can be generated using
-#' the \code{makeHitList} helper function. To use the \code{makeHitList}
+#' on the `hitList` input. The `hitList` can be generated using
+#' the `makeHitList` helper function. To use the `makeHitList`
 #' helper, the user should input a list of patterns that will match on the
 #' column names of each assay. These matches should be mutually exclusive as
 #' to avoid repetition of columns across assays. See the examples section.
 #'
-#' @param hitList a named \code{list} or \code{List} of logical vectors that
+#' @param hitList a named `list` or `List` of logical vectors that
 #' indicate groupings in the assays
 #'
-#' @param patternList a named \code{list} or \code{List} of atomic character
+#' @param patternList a named `list` or `List` of atomic character
 #' vectors that are the input to `grepl` for identifying groupings in
 #' the assays
 #'

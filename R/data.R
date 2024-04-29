@@ -8,7 +8,7 @@
 #' Adrenocortical Carcinoma. Cancer Cell 2016, 29:723-736.
 #'
 #' @description
-#' A \code{\link{MultiAssayExperiment}} object providing a reduced version of
+#' A [`MultiAssayExperiment`] object providing a reduced version of
 #' the TCGA ACC dataset for all 92 patients. RNA-seq, copy number, and somatic
 #' mutations are included only for genes whose proteins are included in the
 #' reverse-phase protein array. The MicroRNA-seq dataset is also included,
@@ -18,21 +18,21 @@
 #'
 #' @keywords data
 #'
-#' @format A \code{MultiAssayExperiment} with 5 experiments, providing:
+#' @format A `MultiAssayExperiment` with 5 experiments, providing:
 #' \describe{
-#'     \item{RNASeq2GeneNorm}{RNA-seq count data: an \code{ExpressionSet}
+#'     \item{RNASeq2GeneNorm}{RNA-seq count data: an `ExpressionSet`
 #'     with 198 rows and 79 columns}
 #'     \item{gistict}{Reccurent copy number lesions identified by GISTIC2:
-#'     a \code{SummarizedExperiment} with 198 rows and 90 columns}
-#'     \item{RPPAArray}{Reverse Phase Protein Array: an \code{ExpressionSet}
+#'     a `SummarizedExperiment` with 198 rows and 90 columns}
+#'     \item{RPPAArray}{Reverse Phase Protein Array: an `ExpressionSet`
 #'     with 33 rows and 46 columns. Rows are indexed by genes,
 #'     but protein annotations are available from
 #'     \code{featureData(miniACC[["RPPAArray"]])}. The source of these
 #'     annotations is noted in \code{abstract(miniACC[["RPPAArray"]])}}
-#'     \item{Mutations}{Somatic mutations: a \code{matrix} with 223 rows and
+#'     \item{Mutations}{Somatic mutations: a `matrix` with 223 rows and
 #'     90 columns. 1 for any kind of non-silent mutation, zero for silent
 #'     (synonymous) or no mutation.}
-#'     \item{miRNASeqGene}{microRNA sequencing: an \code{ExpressionSet} with
+#'     \item{miRNASeqGene}{microRNA sequencing: an `ExpressionSet` with
 #'     471 rows and 80 columns. Rows not having at least 5 counts in at least
 #'     5 samples were removed.}
 #' }

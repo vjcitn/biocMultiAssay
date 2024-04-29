@@ -13,7 +13,7 @@ mapToList(dfmap, assayCol = "assay")
 \item{listmap}{A named \code{list} object containing \code{DataFrame}s
 with "primary" and "colname" columns}
 
-\item{fill}{logical(1) Whether to fill the map with an empty \code{DataFrame}
+\item{fill}{\code{logical(1)} Whether to fill the map with an empty \code{DataFrame}
 when empty elements are present in the input list}
 
 \item{dfmap}{A \code{data.frame} or \code{DataFrame} object with
@@ -23,7 +23,7 @@ identifiers in the first column}
 names column}
 }
 \value{
-A \linkS4class{DataFrame} class object of names
+A \code{\link{DataFrame}} class object of names
 
 A \code{list} object of DataFrames for each assay
 }

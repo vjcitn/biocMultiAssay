@@ -1,10 +1,10 @@
-#' @param listmap A named \code{list} object containing \code{DataFrame}s
+#' @param listmap A named `list` object containing `DataFrame`s
 #'   with "primary" and "colname" columns
 #'
-#' @param fill logical(1) Whether to fill the map with an empty \code{DataFrame}
+#' @param fill `logical(1)` Whether to fill the map with an empty `DataFrame`
 #'   when empty elements are present in the input list
 #'
-#' @return A \linkS4class{DataFrame} class object of names
+#' @return A [`DataFrame`] class object of names
 #' @describeIn mapToList The inverse of the listToMap operation
 #' @export listToMap
 listToMap <- function(listmap, fill = TRUE) {

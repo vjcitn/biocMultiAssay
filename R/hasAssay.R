@@ -1,13 +1,13 @@
 #' Checking assay method for any class
 #'
-#' The \code{hasAssay} function is intended for developers who would like to
-#' include new classes into a \code{MultiAssayExperiment} instance.
-#' It checks the methods tables of the \code{assay} function for the
+#' The `hasAssay` function is intended for developers who would like to
+#' include new classes into a `MultiAssayExperiment` instance.
+#' It checks the methods tables of the `assay` function for the
 #' specified class of the argument.
 #'
-#' @param object A \code{MultiAssayExperiment} or \code{named list}
+#' @param object A `MultiAssayExperiment` or \code{named list}
 #'     object instance
-#' @return A \code{logical} value indicating method availability
+#' @return A `logical` value indicating method availability
 #'
 #' @examples
 #' lst <- structure(list(), .Names=character())

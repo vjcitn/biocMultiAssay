@@ -56,36 +56,36 @@ NULL
 #' @title Subsetting a MultiAssayExperiment object
 #'
 #' @description A set of functions for extracting and dividing a
-#' \code{MultiAssayExperiment}
+#' `MultiAssayExperiment`
 #'
-#' @param x A \code{MultiAssayExperiment} or \code{ExperimentList}
+#' @param x A `MultiAssayExperiment` or `ExperimentList`
 #'
-#' @param i Either a \code{character}, \code{integer}, \code{logical} or
-#' \code{GRanges} object for subsetting by rows
+#' @param i Either a `character`, `integer`, `logical` or
+#' `GRanges` object for subsetting by rows
 #'
-#' @param j Either a \code{character}, \code{logical}, or \code{numeric} vector
-#' for subsetting by \code{colData} rows. See details for more information.
+#' @param j Either a `character`, `logical`, or `numeric` vector
+#' for subsetting by `colData` rows. See details for more information.
 #'
-#' @param k Either a \code{character}, \code{logical}, or \code{numeric} vector
+#' @param k Either a `character`, `logical`, or `numeric` vector
 #' for subsetting by assays
 #'
 #' @param ... Additional arguments passed on to lower level functions.
 #'
 #' @param drop logical (default FALSE) whether to drop all empty assay elements
-#' in the \code{ExperimentList}
+#' in the `ExperimentList`
 #'
 #' @aliases [,MultiAssayExperiment,ANY-method subsetByColData subsetByRow
 #' subsetByColumn subsetByAssay subset subsetBy
 #'
 #' @details
-#' Subsetting a MultiAssayExperiment by the \strong{j} index can yield a call
-#' to either \code{subsetByColData} or \code{subsetByColumn}. For vector inputs,
-#' the subset will be applied to the \code{colData} rows. For \code{List}-type
+#' Subsetting a MultiAssayExperiment by the **j** index can yield a call
+#' to either `subsetByColData` or `subsetByColumn`. For vector inputs,
+#' the subset will be applied to the `colData` rows. For `List`-type
 #' inputs, the List will be applied to each of the elements in the
-#' \code{ExperimentList}.
+#' `ExperimentList`.
 #' The order of the subsetting elements in the
-#' \code{List} must match that of the \code{ExperimentList} in the
-#' \code{MultiAssayExperiment}.
+#' `List` must match that of the `ExperimentList` in the
+#' `MultiAssayExperiment`.
 #'
 #' \itemize{
 #' \item subsetBycolData: Select biological units by vector input types
@@ -95,7 +95,7 @@ NULL
 #' }
 #'
 #' @return \code{subsetBy*} operations are endomorphic and return either
-#' \code{MultiAssayExperiment} or \code{ExperimentList} depending on the
+#' `MultiAssayExperiment` or `ExperimentList` depending on the
 #' input.
 #'
 #' @examples
@@ -156,8 +156,8 @@ setGeneric("subsetByColumn", function(x, y) standardGeneric("subsetByColumn"))
 
 #' @rdname subsetBy
 #' @export subsetByAssay
-#' @param y Any argument used for subsetting, can be a \code{character},
-#' \code{logical}, \code{integer}, \code{list} or \code{List} vector
+#' @param y Any argument used for subsetting, can be a `character`,
+#' `logical`, `integer`, `list` or `List` vector
 setGeneric("subsetByAssay", function(x, y) standardGeneric("subsetByAssay"))
 
 .subsetCOLS <- function(object, cutter) {

@@ -1,5 +1,5 @@
-#' @describeIn ExperimentList Obtain the specified assay with a \code{numeric}
-#' or \code{character} reference
+#' @describeIn ExperimentList Obtain the specified assay with a `numeric`
+#' or `character` reference
 setMethod("assay", c("ANY", "missing"),
     function(x, i, withDimnames = TRUE, ...) {
         if (is(x, "ExpressionSet"))
@@ -49,7 +49,7 @@ setReplaceMethod("assays", c("ExperimentList", "ANY"),
 
 
 #' @describeIn ExperimentList Get the assay data from each element in the
-#' \link{ExperimentList}
+#' [`ExperimentList`]
 #' @param withDimnames logical (default TRUE) whether to return dimension names
 #' @aliases assay,ExperimentList,missing-method
 setMethod("assays", "ExperimentList", function(x, withDimnames = TRUE, ...) {
@@ -67,7 +67,7 @@ setMethod("assays", "ExperimentList", function(x, withDimnames = TRUE, ...) {
 })
 
 #' @rdname ExperimentList-class
-#' @param i A scalar \code{character} or \code{integer} index
+#' @param i A scalar `character` or `integer` index
 setMethod("assay", c("ExperimentList", "missing"),
     function(x, i, withDimnames = TRUE, ...) {
         if (!length(x))
@@ -105,7 +105,7 @@ setMethod("assay", c("ExperimentList", "character"),
     }
 )
 
-#' @describeIn MultiAssayExperiment Obtain a \code{\link{SimpleList}} of assay
+#' @describeIn MultiAssayExperiment Obtain a [`SimpleList`] of assay
 #' data for all available experiments in the object
 #' @param withDimnames logical (default TRUE) whether to return dimension names
 #' included in the object
@@ -117,8 +117,9 @@ setMethod("assays", "MultiAssayExperiment",
 )
 
 #' @describeIn MultiAssayExperiment Convenience function for extracting the
-#' assay of the first element (default) in the \code{ExperimentList}. A
-#' \code{numeric} or \code{character} index can also be provided
+#'   assay of the first element (default) in the `ExperimentList`. A `numeric`
+#'   or `character` index can also be provided
+#'
 #' @exportMethod assay
 setMethod("assay", c("MultiAssayExperiment", "missing"),
     function(x, i, withDimnames = TRUE, ...) {
