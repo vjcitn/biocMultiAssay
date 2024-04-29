@@ -149,7 +149,7 @@ test_that("getWithColData works", {
         drop = FALSE]
     expect_identical(cDataMatch, matchedData)
 
-    ## Empty MAE colData return assay colData
+    ## Empty MAE colData return assay colData for append
     MAE0 <- MAE
     colData(MAE0) <- DataFrame(row.names = rownames(colData(MAE0)))
     cData <- colData(getWithColData(MAE0, 1L, "append"))
@@ -158,6 +158,7 @@ test_that("getWithColData works", {
         colData(se1)
     )
 
+    ## Empty MAE colData return assay colData for replace
     MAE0 <- MAE
     colData(MAE0) <- DataFrame(row.names = rownames(colData(MAE0)))
     cData <- colData(getWithColData(MAE0, 1L, "replace"))
@@ -167,6 +168,32 @@ test_that("getWithColData works", {
         DataFrame(row.names = mapToList(sampleMap(MAE0))[[1]][["primary"]])
     )
     expect_true( isEmpty(cData) )
+
+
+    ## Shuffled rows in MAE colData for append
+    MAE0 <- MAE
+    colData(MAE0) <- colData(MAE0)[sample(nrow(colData(MAE0))), ]
+    cData <- colData(getWithColData(MAE0, 1L, "append"))
+    cDataMatch <- cData[, names(colData(MAE0)), drop = FALSE]
+    matchedData <- colData(MAE0)[
+        match(
+            mapToList(sampleMap)[[1]][["primary"]], rownames(colData(MAE0))
+        ), , drop = FALSE]
+    matchedData <- matchedData[order(rownames(matchedData)), ]
+    testres <- unlist(
+        Map(function(x, y) { identical(x, y) }, x = cDataMatch, y = matchedData)
+    )
+    expect_true( all(testres) )
+
+    ## Shuffled rows in MAE colData for replace
+    MAE0 <- MAE
+    colData(MAE0) <- colData(MAE0)[sample(nrow(colData(MAE0))), ]
+    cData <- colData(getWithColData(MAE0, 1L, "replace"))
+    matchedData <- colData(MAE0)[
+        match(
+            mapToList(sampleMap)[[1]][["primary"]], rownames(colData(MAE0))
+        ), , drop = FALSE]
+    expect_identical(cData, matchedData)
 
     ## Empty assay colData return MAE colData
     MAE0 <- MAE
