@@ -23,7 +23,7 @@ of observations per biological unit are present in all assays.
 \section{Functions}{
 \itemize{
 \item \code{MatchedAssayExperiment()}: Construct a
-\code{MatchedAssayExperiment} class from \linkS4class{MultiAssayExperiment}
+\code{MatchedAssayExperiment} class from \code{\link{MultiAssayExperiment}}
 
 }}
 \examples{
@@ -33,5 +33,5 @@ acc
 
 }
 \seealso{
-\link{MultiAssayExperiment}
+\code{\link{MultiAssayExperiment}}
 }

@@ -18,22 +18,22 @@ upsetSamples(
 \arguments{
 \item{MultiAssayExperiment}{A \code{MultiAssayExperiment} object}
 
-\item{nsets}{numeric(1) The number of sets to analyze. If specified,
+\item{nsets}{\code{numeric(1)} The number of sets to analyze. If specified,
 \code{sets} will be ignored.}
 
-\item{sets}{character() A character vector of names in MultiAssayExperiment
+\item{sets}{\code{character()} A character vector of names in MultiAssayExperiment
 to use. If specified, \code{nsets} will be ignored.}
 
-\item{nintersects}{numeric() The number of intersections to plot. By
+\item{nintersects}{\code{numeric(1)} The number of intersections to plot. By
 default, all intersections will be plotted.}
 
 \item{order.by}{How the intersections in the matrix should be ordered by.
 Options include frequency (entered as "freq"), degree, or both in any order.}
 
-\item{check.names}{logical(1) Whether to munge names as in the
+\item{check.names}{\code{logical(1)} Whether to munge names as in the
 \code{data.frame()} constructor (default FALSE).}
 
-\item{...}{parameters passed to \code{\link[UpSetR]{upset}}}
+\item{...}{parameters passed to \code{\link[UpSetR:upset]{UpSetR::upset}}}
 }
 \value{
 Produces a visualization of set intersections using the UpSet matrix

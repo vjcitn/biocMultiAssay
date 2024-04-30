@@ -79,7 +79,7 @@
 #'   then saved into the `.h5` file format. This function relies heavily on
 #'   the `HDF5Array` package whose installation is required before use.
 #'   `saveHDF5MultiAssayExpeirment` preserves the classes contained in the
-#'   \linkS4class{ExperimentList} with the exception of `matrix` which is
+#'   [`ExperimentList`] with the exception of `matrix` which is
 #'   converted to `HDF5Matrix`. Internal `SummarizedExperiment` assays are
 #'   converted to HDF5-backed assays as in
 #'   `HDF5Array::saveHDF5SummarizedExperiment`. `SummarizedExperiment`
@@ -91,10 +91,10 @@
 #'
 #' @inheritParams HDF5Array::saveHDF5SummarizedExperiment
 #'
-#' @param x A \linkS4class{MultiAssayExperiment} object or derivative
+#' @param x A [`MultiAssayExperiment`] object or derivative
 #'
 #' @param dir The path (as a single string) to the directory where to save the
-#'   HDF5-based \linkS4class{MultiAssayExperiment} object or to load it from.
+#'   HDF5-based [`MultiAssayExperiment`] object or to load it from.
 #'
 #'   When saving, the directory will be created if it doesn't already exist.
 #'   If the directory already exists and no prefix is specified and
@@ -115,8 +115,6 @@
 #'   is set to `NA` by default, in which case verbosity is controlled
 #'   by `DelayedArray.verbose.block.processing` option. Setting
 #'   `verbose` to `TRUE` or `FALSE` overrides the option.
-#'
-#' @md
 #'
 #' @examples
 #'

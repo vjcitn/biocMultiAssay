@@ -100,7 +100,7 @@ makeHitList(x, patternList)
 
 \item{x}{A MultiAssayExperiment or ExperimentList}
 
-\item{replicates}{A list of \linkS4class{LogicalList}s
+\item{replicates}{A list of \code{\link{LogicalList}}s
 indicating multiple / duplicate entries for each biological unit per assay,
 see \code{replicated} (default \code{replicated(x)}).}
 
@@ -113,8 +113,8 @@ as indicated by the \code{replicated} method for \code{MultiAssayExperiment}}
 index for \code{colData} columns to be included}
 
 \item{i}{longFormat: The i-th assay in
-\linkS4class{SummarizedExperiment}-like objects. A vector input is
-supported in the case that the SummarizedExperiment object(s) has more
+\code{SummarizedExperiment}-like objects. A vector input is
+supported in the case that the \code{SummarizedExperiment} object(s) has more
 than one assay (default 1L),
 renameColname: Either a \code{numeric} or \code{character} index
 indicating the assay whose colnames are to be renamed}
@@ -127,12 +127,12 @@ if necessary}
 column names. In \code{wideFormat}, experiments and rownames (and when
 replicate samples are present, colnames) are seperated by this delimiter}
 
-\item{mode}{String indicating how \linkS4class{MultiAssayExperiment}
+\item{mode}{String indicating how \code{MultiAssayExperiment}
 column-level metadata should be added to the
-\linkS4class{SummarizedExperiment} \code{colData}.}
+\code{SummarizedExperiment} \code{colData}.}
 
-\item{verbose}{logical(1) Whether to `suppressMessages` on subsetting
-operations in `getWithColData` (default FALSE)}
+\item{verbose}{\code{logical(1)} Whether to \code{suppressMessages} on subsetting
+operations in \code{getWithColData} (default FALSE)}
 
 \item{value}{renamePrimary: A \code{character} vector of the same length as
 the existing \code{rownames(colData)} to use for replacement,
@@ -153,7 +153,6 @@ See the itemized list in the description section for details.
 A set of helper functions were created to help clean and
 manipulate a MultiAssayExperiment object. \code{intersectRows} also works
 for \code{ExperimentList} objects.
-
 \itemize{
 \item complete.cases: Returns a logical vector corresponding to 'colData'
 rows that have data across all experiments
@@ -176,10 +175,10 @@ rowname) in the \code{sampleMap}
 measurements across all experiments and is guided by the replicated
 return value
 \item longFormat: A \code{MultiAssayExperiment} method that
-returns a small and skinny \link{DataFrame}. The \code{colDataCols}
+returns a small and skinny \code{\link{DataFrame}}. The \code{colDataCols}
 arguments allows the user to append \code{colData} columns to the data.
 \item wideFormat: A function to reshape the data in a
-\code{MultiAssayExperiment} to a "wide" format \link{DataFrame}. Each row in
+\code{MultiAssayExperiment} to a "wide" format \code{\link{DataFrame}}. Each row in
 the \code{DataFrame} represents an observation (corresponding to an entry in
 the \code{colData}). If replicates are present, their data will be appended at
 the end of the corresponding row and will generate additional \code{NA} data.
@@ -187,7 +186,7 @@ It is recommended to remove or consolidate technical replicates with
 \code{mergeReplicates}. Optional \code{colDataCols} can be added when the
 original object is a \code{MultiAssayExperiment}.
 \item hasRowRanges: A function that identifies ExperimentList elements
-that have a \link[=RangedSummarizedExperiment-class]{rowRanges} method
+that have a \code{\link[=RangedSummarizedExperiment-class]{rowRanges}} method
 \item getWithColData: A convenience function for extracting an assay
 and associated colData
 \item renamePrimary: A convenience function to rename the primary
@@ -198,8 +197,8 @@ of a particular assay
 }
 \details{
 The \code{replicated} function finds replicate measurements in each
-assay and returns a list of \linkS4class{LogicalList}s.
-Each element in a single \linkS4class{LogicalList} corresponds to a
+assay and returns a list of \code{\link{LogicalList}}s.
+Each element in a single \code{\link{LogicalList}} corresponds to a
 biological or \emph{primary} unit as in the \code{sampleMap}. Below is a
 small graphic for one particular biological unit in one assay, where the
 logical vector corresponds to the number of measurements/samples in the
@@ -214,38 +213,38 @@ assay:
 replicate. \emph{Note}. These methods are not available for the
 \code{ExperimentList} class due to a missing \code{sampleMap} structure
 (by design).
-\code{showReplicated} returns a list of \linkS4class{CharacterList}s where
+\code{showReplicated} returns a list of \code{\link{CharacterList}}s where
 each element corresponds to the the biological or \emph{primary} units that
 are replicated in that assay element. The values in the inner list are
 the \code{colnames} in the assay that are technical replicates.
 
 The \code{replicates} function (noun) returns the \code{colname}s
-  from the \code{sampleMap} that were identified as replicates. It returns a
-  list of \linkS4class{CharacterList}s for each assay present in the
-  \code{MultiAssayExperiment} and an inner entry for each biological unit
-  that has replicate observations in that assay.
+from the \code{sampleMap} that were identified as replicates. It returns a
+list of \code{\link{CharacterList}}s for each assay present in the
+\code{MultiAssayExperiment} and an inner entry for each biological unit
+that has replicate observations in that assay.
 
 The \code{mergeReplicates} function is a house-keeping method
 for a \code{MultiAssayExperiment} where only \code{complete.cases} are
 returned. This by-assay operation averages replicate measurements
 (by default) and columns are aligned by the row order in \code{colData}.
 Users can provide their own function for merging replicates with the
-\code{simplify} functional argument. Additional inputs \code{\ldots} are
+\code{simplify} functional argument. Additional inputs \code{...} are
 sent to the 'simplify' function.
 
 The \code{mergeReplicates} "ANY" method consolidates duplicate
 measurements for rectangular data structures, returns object of the same
-class (endomorphic). The ellipsis or \code{\ldots} argument allows the
+class (endomorphic). The ellipsis or \code{...} argument allows the
 user to provide additional arguments to the \code{simplify} functional
 argument.
 
 The \code{longFormat} "ANY" class method, works with classes such as
-\link{ExpressionSet} and \link{SummarizedExperiment} as well as \code{matrix}
-to provide a consistent long and skinny \link{DataFrame}.
+\code{\link{ExpressionSet}} and \code{\link{SummarizedExperiment}} as well as \code{matrix}
+to provide a consistent long and skinny \code{\link{DataFrame}}.
 
 The \code{hasRowRanges} method identifies assays that support
-a \link[=RangedSummarizedExperiment-class]{rowRanges} method \emph{and}
-return a \linkS4class{GRanges} object.
+a \code{\link[=RangedSummarizedExperiment-class]{rowRanges}} method \emph{and}
+return a \code{\link{GRanges}} object.
 }
 \section{mergeReplicates}{
 
@@ -254,7 +253,7 @@ The \code{mergeReplicates} function makes use of the output from
 biological unit in the \code{MultiAssayExperiment}. This function will
 return a \code{MultiAssayExperiment} with merged replicates. Additional
 arguments can be provided to the simplify argument via the ellipsis
-(\ldots). For example, when replicates "TCGA-B" and "TCGA-A" are found in
+(\code{...}). For example, when replicates "TCGA-B" and "TCGA-A" are found in
 the assay, the name of the first appearing replicate is taken (i.e., "B").
 Note that a typical use case of merging replicates occurs when there are
 multiple measurements on the \strong{same} sample (within the same assay)
@@ -264,24 +263,24 @@ and can therefore be averaged.
 \section{longFormat}{
 
 The 'longFormat' method takes data from the \code{\link{ExperimentList}}
-in a \code{\link{MultiAssayExperiment}} and returns a uniform
-\code{\link{DataFrame}}. The resulting DataFrame has columns indicating
+in a \code{MultiAssayExperiment} and returns a uniform
+\code{DataFrame}. The resulting DataFrame has columns indicating
 primary, rowname, colname and value. This method can optionally include
 columns of the MultiAssayExperiment colData named by \code{colDataCols} character
 vector argument. (\code{MultiAssayExperiment} method only). The \code{i} argument
 allows the user to specify the assay value for the
-\linkS4class{SummarizedExperiment} assay function's \code{i} argument.
+\code{SummarizedExperiment} assay function's \code{i} argument.
 }
 
 \section{wideFormat}{
 
-The \code{wideFormat} function returns standardized wide \link{DataFrame}
+The \code{wideFormat} function returns standardized wide \code{\link{DataFrame}}
 where each row represents a biological unit as in the \code{colData}.
 Depending on the data and setup, biological units can be patients, tumors,
 specimens, etc. Metadata columns are
 generated based on the names produced in the wide format
-\linkS4class{DataFrame}. These can be accessed via the
-\link[=Vector-class]{mcols} function.
+\code{DataFrame}. These can be accessed via the
+\code{\link[S4Vectors:Vector-class]{mcols()}} function.
 See the \code{wideFormat} section for description of the \code{colDataCols} and
 \code{i} arguments.
 }
@@ -290,7 +289,7 @@ See the \code{wideFormat} section for description of the \code{colDataCols} and
 
 The \code{hasRowRanges} method identifies assays with associated ranged
 row data by directly testing the method on the object. The result from the
-test must be a \linkS4class{GRanges} class object to satisfy the test.
+test must be a \code{\link{GRanges}} class object to satisfy the test.
 }
 
 \section{getWithColData}{
@@ -298,20 +297,19 @@ test must be a \linkS4class{GRanges} class object to satisfy the test.
 The \code{getWithColData} function allows the user to conveniently extract
 a particular assay as indicated by the \strong{\code{i}} index argument. It
 will also attempt to provide the
-\code{\link[=SummarizedExperiment-class]{colData}} along with the
-extracted object using the \code{colData<-} replacement
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{colData}}
+along with the extracted object using the \verb{colData<-} replacement
 method when possible. Typically, this method is available for
-\linkS4class{SummarizedExperiment} and \code{RaggedExperiment}
-classes.
+\code{\link{SummarizedExperiment}} and \code{RaggedExperiment} classes.
 
-The setting of \code{mode} determines how the \code{\link{colData}}
-is added. If \code{mode="append"}, the \linkS4class{MultiAssayExperiment}
-metadata is appended onto that of the \linkS4class{SummarizedExperiment}.
+The setting of \code{mode} determines how the \code{colData}
+is added. If \code{mode="append"}, the \code{MultiAssayExperiment}
+metadata is appended onto that of the \code{SummarizedExperiment}.
 If any fields are duplicated by name, the values in the
-\linkS4class{SummarizedExperiment} are retained, with a warning emitted if
+\code{SummarizedExperiment} are retained, with a warning emitted if
 the values are different.  For \code{mode="replace"}, the
-\linkS4class{MultiAssayExperiment} metadata replaces that of the
-\linkS4class{SummarizedExperiment}, while for \code{mode="none"},
+\code{MultiAssayExperiment} metadata replaces that of the
+\code{SummarizedExperiment}, while for \code{mode="none"},
 no replacement or appending is performed.
 }
 
@@ -321,7 +319,7 @@ The \code{renamePrimary} function allows the user to conveniently change the
 actual names of the primary biological units as seen in
 \code{rownames(colData)}. \code{renameColname} allows the user to change the
 names of a particular assay based on index \code{i}. \code{i} can either be
-a single numeric or character value. See \code{colnames<-} method for
+a single numeric or character value. See \verb{colnames<-} method for
 renaming multiple colnames in a \code{MultiAssayExperiment}.
 }
 

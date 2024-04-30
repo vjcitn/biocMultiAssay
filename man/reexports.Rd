@@ -9,9 +9,9 @@ These objects are imported from other packages. Click on the
 function name to see their documentation.
 
 \itemize{
-    \item {
-    S4Vectors: \linkS4class{DataFrame}
-    }
+\item {
+S4Vectors: \code{\link{DataFrame}}
+}
 }
 }
 \examples{

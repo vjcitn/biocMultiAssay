@@ -1,20 +1,20 @@
 #' Create a generalized Venn Diagram analog for sample membership in multiple
-#' assays, using the upset algorithm in \code{UpSetR}
+#' assays, using the upset algorithm in `UpSetR`
 #'
 #' @param MultiAssayExperiment A `MultiAssayExperiment` object
 #'
-#' @param nsets numeric(1) The number of sets to analyze. If specified,
+#' @param nsets `numeric(1)` The number of sets to analyze. If specified,
 #' `sets` will be ignored.
 #'
-#' @param sets character() A character vector of names in MultiAssayExperiment
+#' @param sets `character()` A character vector of names in MultiAssayExperiment
 #' to use. If specified, `nsets` will be ignored.
 #'
-#' @param ... parameters passed to \code{\link[UpSetR]{upset}}
+#' @param ... parameters passed to [`UpSetR::upset`]
 #'
-#' @param check.names logical(1) Whether to munge names as in the
+#' @param check.names `logical(1)` Whether to munge names as in the
 #' `data.frame()` constructor (default FALSE).
 #'
-#' @param nintersects numeric() The number of intersections to plot. By
+#' @param nintersects `numeric(1)` The number of intersections to plot. By
 #' default, all intersections will be plotted.
 #'
 #' @param order.by How the intersections in the matrix should be ordered by.
@@ -25,8 +25,6 @@
 #' `UpSetR::upset` function requires `data.frame` input and has
 #' many parameters to tune appearance of the result. Assay name handling is
 #' important for interpretability.
-#'
-#' @md
 #'
 #' @examples
 #'

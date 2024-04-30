@@ -7,7 +7,7 @@
 #'
 #' \itemize{
 #'     \item {
-#'     S4Vectors: \linkS4class{DataFrame}
+#'     S4Vectors: [`DataFrame`]
 #'     }
 #' }
 #'

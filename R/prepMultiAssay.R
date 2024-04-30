@@ -1,44 +1,44 @@
-#' Prepare a \code{MultiAssayExperiment} instance
+#' Prepare a `MultiAssayExperiment` instance
 #'
 #' The purpose of this helper function is to faciltate the creation of a
-#' \code{\link{MultiAssayExperiment}} object by detecting any inconsistencies
-#' with all types of names in either the \code{\link{ExperimentList}},
-#' the \code{colData}, or \code{\link{sampleMap}}.
+#' [`MultiAssayExperiment`] object by detecting any inconsistencies
+#' with all types of names in either the [`ExperimentList`],
+#' the `colData`, or [`sampleMap`].
 #'
 #' @section Checks:
-#' The \code{prepMultiAssay} function checks that all columns in the sampleMap
-#' are \code{character}.
+#' The `prepMultiAssay` function checks that all columns in the sampleMap
+#' are `character`.
 #'
 #' It checks that all names and lengths match in both the
-#' \code{\link{ExperimentList}} and in the unique assay names of the
-#' \code{\link{sampleMap}}.
+#' [`ExperimentList`] and in the unique assay names of the
+#' [`sampleMap`].
 #'
-#' If \code{\link{ExperimentList}} names and assay names only differ by case
+#' If [`ExperimentList`] names and assay names only differ by case
 #' and are not duplicated, the function will standardize all names to
 #' lowercase.
 #'
 #' If names cannot be matched between the colname column of the
-#' \code{\link{sampleMap}} and the colnames of the \code{ExperimentList}, those
+#' [`sampleMap`] and the colnames of the `ExperimentList`, those
 #' unmatched will be dropped and found in the "drops" element of the
-#' resulting \code{list}.
+#' resulting `list`.
 #'
-#' Names in the "primary" column of the \code{\link{sampleMap}}, will be
-#' matched to those in the \code{colData}. Unmatched "primary" column rows will
-#' be dropped from the \code{\link{sampleMap}}. Suggestions for name fixes in
-#' either the \code{\link{ExperimentList}} or colnames will be made when
+#' Names in the "primary" column of the [`sampleMap`], will be
+#' matched to those in the `colData`. Unmatched "primary" column rows will
+#' be dropped from the [`sampleMap`]. Suggestions for name fixes in
+#' either the [`ExperimentList`] or colnames will be made when
 #' necessary.
 #'
-#' @param ExperimentList A \code{list} of all combined experiments
-#' @param colData A \linkS4class{DataFrame} of the phenotype
+#' @param ExperimentList A `list` of all combined experiments
+#' @param colData A [`DataFrame`] of the phenotype
 #' data for all participants
-#' @param sampleMap A \linkS4class{DataFrame} of sample identifiers, assay
+#' @param sampleMap A [`DataFrame`] of sample identifiers, assay
 #' samples, and assay names
-#' @param ... Optional arguments for the \code{MultiAssayExperiment} constructor
-#' function such as \code{metadata} and \code{drops}.
-#' @return A \code{list} containing all the essential components of a
-#' \code{\link{MultiAssayExperiment}} as well as a "drops" metadata element that
+#' @param ... Optional arguments for the `MultiAssayExperiment` constructor
+#' function such as `metadata` and `drops`.
+#' @return A `list` containing all the essential components of a
+#' [`MultiAssayExperiment`] as well as a "drops" metadata element that
 #' indicates non-matched names. The names of the resulting list correspond to
-#' the arguments of the \code{MultiAssayExperiment} constructor function.
+#' the arguments of the `MultiAssayExperiment` constructor function.
 #'
 #' @examples
 #' ## Run example

@@ -1,14 +1,14 @@
 #' Convert map from data.frame or DataFrame to list and vice versa
 #'
-#' The \code{mapToList} function provides a convenient way of reordering a
-#' \code{data.frame} to a \code{list}. The \code{listToMap} function does the
-#' opposite by taking a \code{list} and converting it to \code{DataFrame}.
+#' The `mapToList` function provides a convenient way of reordering a
+#' \code{data.frame} to a `list`. The `listToMap` function does the
+#' opposite by taking a `list` and converting it to `DataFrame`.
 #'
-#' @param dfmap A \code{data.frame} or \code{DataFrame} object with
+#' @param dfmap A \code{data.frame} or `DataFrame` object with
 #' identifiers in the first column
 #' @param assayCol A character vector of length one indicating the assay
 #' names column
-#' @return A \code{list} object of DataFrames for each assay
+#' @return A `list` object of DataFrames for each assay
 #' @example inst/scripts/listToMap-Ex.R
 #' @export mapToList
 mapToList <- function(dfmap, assayCol = "assay") {

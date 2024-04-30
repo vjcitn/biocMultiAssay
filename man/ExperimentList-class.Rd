@@ -44,14 +44,14 @@
 \S4method{assay}{ExperimentList,character}(x, i, withDimnames = TRUE, ...)
 }
 \arguments{
-\item{object, x}{An \code{\linkS4class{ExperimentList}} object}
+\item{object, x}{An \code{\link{ExperimentList}} object}
 
 \item{do.NULL, prefix}{
     See \code{?base::\link[base]{rownames}} for a description of
     these arguments.
   }
 
-\item{replicates}{mergeReplicates: A \code{list} or \linkS4class{LogicalList}
+\item{replicates}{mergeReplicates: A \code{list} or \code{\link{LogicalList}}
 where each element represents a sample and a vector of repeated measurements
 for the sample}
 
@@ -69,31 +69,30 @@ An \code{ExperimentList} class object
 }
 \description{
 The \code{ExperimentList} class is a container that builds on
-  the \code{SimpleList} with additional checks for consistency in experiment
-  names and length. It contains a \code{SimpleList} of experiments with
-  sample identifiers. One element present per experiment performed.
+the \code{SimpleList} with additional checks for consistency in experiment
+names and length. It contains a \code{SimpleList} of experiments with
+sample identifiers. One element present per experiment performed.
 
-  Convert from \code{SimpleList} or \code{list} to the multi-experiment data
-  container. When using the \strong{mergeReplicates} method, additional
-  arguments are passed to the given \code{simplify} function argument (e.g.,
-  \code{na.rm = TRUE})
+Convert from \code{SimpleList} or \code{list} to the multi-experiment data
+container. When using the \strong{mergeReplicates} method, additional
+arguments are passed to the given \code{simplify} function argument (e.g.,
+\code{na.rm = TRUE})
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{show(ExperimentList)}: Show method for
-\code{\linkS4class{ExperimentList}} class
+\item \code{show(ExperimentList)}: Show method for \code{\link{ExperimentList}} class
 
 \item \code{isEmpty(ExperimentList)}: check for zero length across all
 experiments
 
 \item \code{dimnames(ExperimentList)}: Get the dimension names for
-an \code{ExperimentList} using \code{\linkS4class{CharacterList}}
+an \code{ExperimentList} using \code{\link{CharacterList}}
 
 \item \code{colnames(ExperimentList)}: Get the column names for an \code{ExperimentList}
-as a \code{\linkS4class{CharacterList}} slightly more efficiently
+as a \code{\link{CharacterList}} slightly more efficiently
 
 \item \code{rownames(ExperimentList)}: Get the row names for an \code{ExperimentList}
-as a \code{\linkS4class{CharacterList}} slightly more efficiently
+as a \code{\link{CharacterList}} slightly more efficiently
 
 \item \code{mergeReplicates(ExperimentList)}: Apply the mergeReplicates method on the
 ExperimentList elements
@@ -102,7 +101,7 @@ ExperimentList elements
 or \code{character} reference
 
 \item \code{assays(ExperimentList)}: Get the assay data from each element in the
-\link{ExperimentList}
+\code{\link{ExperimentList}}
 
 }}
 \section{coercion}{
@@ -111,9 +110,9 @@ Convert a \code{list} or S4 \code{List} to an ExperimentList using the
 \code{as()} function.
 
 In the following example, \code{x} is either a \code{list} or
-\linkS4class{List}:
+\code{\link{List}}:
 
-\preformatted{    \code{as(x, "ExperimentList")}}
+\preformatted{    as(x, "ExperimentList")}
 }
 
 \examples{
