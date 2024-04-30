@@ -43,6 +43,7 @@ Suggests:
     maftools (>= 2.7.10),
     R.rsp,
     RaggedExperiment,
+    reshape2,
     rmarkdown,
     survival,
     survminer,

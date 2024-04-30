@@ -340,35 +340,20 @@ setMethod("mergeReplicates", "ANY",
 
 .longFormatANY <- function(object, i) {
     rowNAMES <- rownames(object)
-    nullROWS <- is.null(rowNAMES)
-    if (nullROWS)
-        rowNAMES <- as.character(seq_len(nrow(object)))
+    if (is.null(rowNAMES))
+        rowNames <- as.character(seq_len(nrow(object)))
 
     if (is(object, "ExpressionSet"))
         object <- Biobase::exprs(object)
     if (is(object, "SummarizedExperiment") || is(object, "RaggedExperiment"))
         object <- assay(object, i = i)
 
-    ## use stats::reshape instead of reshape2::melt
-    if (nullROWS)
-        rownames(object) <- rowNAMES
-    # if (requireNamespace("reshape2", quietly = TRUE)) {
-    if (FALSE) {
-        object <- reshape2::melt(
-            object, varnames = c("rowname", "colname"), value.name = "value"
-        )
-    } else {
-        if (is.matrix(object))
-            object <- as.data.frame(object)
-        object <- stats::reshape(object, idvar = "rowname",
-            ids = rownames(object), times = names(object),
-            timevar = "colname", varying = list(names(object)),
-            direction = "long", v.names = "value")
-        ## Reshape leaves rownames even if new.row.names = NULL
-        rownames(object) <- NULL
-        object[, c("rowname", "colname", "value")]
-    }
-    object
+    if (!requireNamespace("reshape2", quietly = TRUE))
+        stop("Package 'reshape2' is required for 'longFormat()' conversion")
+
+    reshape2::melt(
+        object, varnames = c("rowname", "colname"), value.name = "value"
+    )
 }
 
 .longFormatElist <- function(object, i) {
