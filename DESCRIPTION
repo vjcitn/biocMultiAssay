@@ -33,7 +33,6 @@ Imports:
     IRanges,
     methods,
     S4Vectors (>= 0.23.19),
-    stats,
     tidyr,
     utils
 Suggests:
