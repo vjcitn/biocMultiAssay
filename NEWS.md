@@ -1,8 +1,10 @@
-## Changes in version 1.30.0
+## Changes in version 1.30.1
 
 ### Bug fixes and minor improvements
 
 * Updated CITATION information in the main vignette.
+* Use `reshape2::melt` instead of `stats::reshape` to preserve row names in
+`longFormat`
 
 ## Changes in version 1.28.0
 
