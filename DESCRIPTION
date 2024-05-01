@@ -11,11 +11,11 @@ Authors@R: c(
     person("Vincent J", "Carey", , , c("aut", "ctb")),
     person("Levi", "Waldron", , "lwaldron.research@gmail.com", "aut"),
     person("MultiAssay", "SIG", , "biocmultiassay@googlegroups.com", "ctb"))
-Description: MultiAssayExperiment harmonizes data management of multiple
-    experimental assays performed on an overlapping set of specimens.  It
-    provides a familiar Bioconductor user experience by extending concepts
-    from SummarizedExperiment, supporting an open-ended mix of standard
-    data classes for individual assays, and allowing subsetting by genomic
+Description: Harmonize data management of multiple experimental assays
+    performed on an overlapping set of specimens.  It provides a familiar
+    Bioconductor user experience by extending concepts from
+    SummarizedExperiment, supporting an open-ended mix of standard data
+    classes for individual assays, and allowing subsetting by genomic
     ranges or rownames. Facilities are provided for reshaping data into
     wide and long formats for adaptability to graphing and downstream
     analysis.
@@ -33,7 +33,6 @@ Imports:
     IRanges,
     methods,
     S4Vectors (>= 0.23.19),
-    stats,
     tidyr,
     utils
 Suggests:
@@ -43,6 +42,7 @@ Suggests:
     maftools (>= 2.7.10),
     R.rsp,
     RaggedExperiment,
+    reshape2,
     rmarkdown,
     survival,
     survminer,

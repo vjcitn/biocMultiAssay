@@ -238,3 +238,20 @@ test_that("renaming helpers work", {
         newaffynames
     )
 })
+
+
+test_that(".longFormatANY works", {
+    denv <- new.env(parent = emptyenv())
+    data("miniACC", package="MultiAssayExperiment", envir = denv)
+    miniACC <- denv[["miniACC"]]
+
+    expect_silent(
+        longdf <- longFormat(miniACC)
+    )
+    expect_true(
+        all(
+            as.character(longdf[["rowname"]]) %in%
+                Reduce(union, rownames(miniACC))
+        )
+    )
+})
