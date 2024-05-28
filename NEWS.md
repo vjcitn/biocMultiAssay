@@ -1,7 +1,9 @@
-## Changes in version 1.30.1
+## Changes in version 1.30.2
 
 ### Bug fixes and minor improvements
 
+* The `colData<-` replacement method now correctly works with `data.frame`
+value inputs (@drighelli, #330). 
 * Updated CITATION information in the main vignette.
 * Use `reshape2::melt` instead of `stats::reshape` to preserve row names in
 `longFormat`
