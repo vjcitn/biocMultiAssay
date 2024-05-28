@@ -700,7 +700,7 @@ setReplaceMethod("experiments", c("MultiAssayExperiment", "List"),
 #' @exportMethod colData<-
 #' @rdname MultiAssayExperiment-methods
 setReplaceMethod("colData", c("MultiAssayExperiment", "DataFrame"),
-    function(x, value) {
+    function(x, ..., value) {
         x_rnames <- rownames(colData(x))
         v_rnames <- rownames(value)
 
@@ -730,11 +730,12 @@ setReplaceMethod("colData", c("MultiAssayExperiment", "DataFrame"),
 
 #' @rdname MultiAssayExperiment-methods
 setReplaceMethod("colData", c("MultiAssayExperiment", "ANY"),
-    function(x, value) {
+    function(x, ..., value) {
         if (!is.data.frame(value))
             stop("'colData' can be either 'data.frame' or 'DataFrame'")
-        value <- as(value, "DataFrame")
-        `colData<-`(x, value)
+        else
+            value <- as(value, "DataFrame")
+        `colData<-`(x, value = value)
     }
 )
 

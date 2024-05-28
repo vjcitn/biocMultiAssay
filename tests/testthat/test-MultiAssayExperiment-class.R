@@ -140,6 +140,14 @@ test_that("replace methods are using rebliss and replace", {
     )
 
     mae0 <- mae
+    expect_silent(
+        colData(mae0) <- as.data.frame(colData(mae0))
+    )
+    expect_error(
+        colData(mae0) <- as.list(colData(mae0))
+    )
+
+    mae0 <- mae
     vcol <- colData(mae0)
     vcol <- DataFrame(vcol, treat = c(0, 0, 1, 1))
     expect_silent(
