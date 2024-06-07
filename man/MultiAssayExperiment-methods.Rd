@@ -47,9 +47,9 @@ drops(x, ...) <- value
 
 \S4method{experiments}{MultiAssayExperiment,List}(object) <- value
 
-\S4method{colData}{MultiAssayExperiment,DataFrame}(x) <- value
+\S4method{colData}{MultiAssayExperiment,DataFrame}(x, ...) <- value
 
-\S4method{colData}{MultiAssayExperiment,ANY}(x) <- value
+\S4method{colData}{MultiAssayExperiment,ANY}(x, ...) <- value
 
 \S4method{drops}{MultiAssayExperiment}(x, ...) <- value
 
