@@ -5,13 +5,11 @@
 #' @description These objects are imported from other packages. Click on the
 #' function name to see their documentation.
 #'
-#' \itemize{
-#'     \item {
-#'     S4Vectors: [`DataFrame`]
-#'     }
-#' }
+#' * [`S4Vectors::DataFrame-class`]
 #'
 #' @aliases NULL reexports DataFrame
+#'
+#' @return * `S4Vectors::DataFrame`: A `DataFrame` class object
 #'
 #' @examples
 #' DataFrame()

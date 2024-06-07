@@ -4,14 +4,16 @@
 \alias{reexports}
 \alias{DataFrame}
 \title{Objects exported from other packages}
+\value{
+\itemize{
+\item \code{S4Vectors::DataFrame}: A \code{DataFrame} class object
+}
+}
 \description{
 These objects are imported from other packages. Click on the
 function name to see their documentation.
-
 \itemize{
-\item {
-S4Vectors: \code{\link{DataFrame}}
-}
+\item \code{\link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame}}
 }
 }
 \examples{
