@@ -1,3 +1,10 @@
+## Changes in version 1.32.0
+
+### Bug fixes and minor improvements
+
+* Various documentation improvements to `MultiAssayExperimenToMAF`,
+`saveHDF5MultiAssayExperiment`, and `reexports`
+
 ## Changes in version 1.30.2
 
 ### Bug fixes and minor improvements
