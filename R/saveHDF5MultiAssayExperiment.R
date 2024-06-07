@@ -69,7 +69,7 @@
     invisible(x)
 }
 
-#' @rdname HDF5MultiAssayExperiment
+#' @name HDF5MultiAssayExperiment
 #'
 #' @title Save a MultiAssayExperiment class object to HDF5 and Rds files
 #'
@@ -115,6 +115,11 @@
 #'   is set to `NA` by default, in which case verbosity is controlled
 #'   by `DelayedArray.verbose.block.processing` option. Setting
 #'   `verbose` to `TRUE` or `FALSE` overrides the option.
+#'
+#' @return * `saveHDF5MultiAssayExperiment`: saves an `Rds` and `h5` file to a
+#'   directory from the input `MultiAssayExperiment`
+#' * `loadHDF5MultiAssayExperiment`: a `MultiAssayExperiment` object loaded
+#'   from a folder as saved by `saveHDF5MultiAssayExperiment`
 #'
 #' @examples
 #'
@@ -176,7 +181,7 @@ saveHDF5MultiAssayExperiment <-
     )
 }
 
-#' @name HDF5MultiAssayExperiment
+#' @rdname HDF5MultiAssayExperiment
 #'
 #' @export
 loadHDF5MultiAssayExperiment <- function(dir = "h5_mae", prefix = NULL)
