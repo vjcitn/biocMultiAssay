@@ -4,6 +4,8 @@
 
 * Various documentation improvements to `MultiAssayExperimenToMAF`,
 `saveHDF5MultiAssayExperiment`, and `reexports`
+* When `rownames` are numeric characters e.g., "1", ensure they stay character
+when converting `MultiAssayExperiment` to `longFormat`.
 
 ## Changes in version 1.30.2
 
