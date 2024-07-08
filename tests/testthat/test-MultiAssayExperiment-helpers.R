@@ -254,4 +254,19 @@ test_that(".longFormatANY works", {
                 Reduce(union, rownames(miniACC))
         )
     )
+
+    m <- matrix(1:12, nrow = 4)
+    colnames(m) <- LETTERS[1:3]
+    se <- SummarizedExperiment(m)
+    rownames(se) <- c(1, 2, 4, 5)
+
+    mae <- MultiAssayExperiment(list(x = se))
+    longformat <- longFormat(mae)
+    expect_true(
+        is.character(longformat[["rowname"]])
+    )
+    expect_identical(
+        typeof(m),
+        typeof(longformat[["value"]])
+    )
 })
