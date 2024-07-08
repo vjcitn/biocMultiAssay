@@ -1,4 +1,4 @@
-## Changes in version 1.30.2
+## Changes in version 1.30.3
 
 ### Bug fixes and minor improvements
 
@@ -7,6 +7,8 @@ value inputs (@drighelli, #330).
 * Updated CITATION information in the main vignette.
 * Use `reshape2::melt` instead of `stats::reshape` to preserve row names in
 `longFormat`
+* When `rownames` are numeric characters e.g., "1", ensure they stay character
+when converting `MultiAssayExperiment` to `longFormat`.
 
 ## Changes in version 1.28.0
 
