@@ -351,9 +351,12 @@ setMethod("mergeReplicates", "ANY",
     if (!requireNamespace("reshape2", quietly = TRUE))
         stop("Package 'reshape2' is required for 'longFormat()' conversion")
 
-    reshape2::melt(
+    res <- reshape2::melt(
         object, varnames = c("rowname", "colname"), value.name = "value"
     )
+    if (!is.character(res[["rowname"]]))
+        res[["rowname"]] <- as.character(res[["rowname"]])
+    res
 }
 
 .longFormatElist <- function(object, i) {
