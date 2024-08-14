@@ -15,7 +15,10 @@ env:
 jobs:
   checkRelease:
     runs-on: ubuntu-latest
-    container: bioconductor/bioconductor_docker:${{ env.BIOC_VERSION }}
+    strategy:
+      matrix:
+      bioc_version: [RELEASE_3_19] # Define versions as matrix variables
+    container: bioconductor/bioconductor_docker:${{ matrix.BIOC_VERSION }}
 
     steps:
       - name: Checkout Repository
