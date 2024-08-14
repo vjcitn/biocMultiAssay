@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-      bioc_version: [RELEASE_3_19] # Define versions as matrix variables
+        bioc_version: [RELEASE_3_19] # Define versions as matrix variables
     container: bioconductor/bioconductor_docker:${{ matrix.bioc_version }}
 
     steps:
