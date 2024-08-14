@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
       bioc_version: [RELEASE_3_19] # Define versions as matrix variables
-    container: bioconductor/bioconductor_docker:${{ matrix.BIOC_VERSION }}
+    container: bioconductor/bioconductor_docker:${{ matrix.bioc_version }}
 
     steps:
       - name: Checkout Repository
