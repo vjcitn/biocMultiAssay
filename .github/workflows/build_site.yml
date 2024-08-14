@@ -4,17 +4,17 @@ on:
   push:
     branches:
       - RELEASE_3_19
+    workflow_dispatch:
+
+env:
+  R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+  CRAN: https://packagemanager.posit.co/cran/__linux__/jammy/latest
+  BIOC_VERSION: RELEASE_3_19
 
 jobs:
   checkRelease:
     runs-on: ubuntu-latest
-
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      CRAN: https://packagemanager.posit.co/cran/__linux__/jammy/latest
-      BIOC_VERSION: RELEASE_3_19
-
     container: bioconductor/bioconductor_docker:${{ env.BIOC_VERSION }}
 
     steps:
