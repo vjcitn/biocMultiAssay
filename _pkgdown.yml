@@ -1,6 +1,8 @@
 title: MultiAssayExperiment
+url: https://github.com/waldronlab/MultiAssayExperiment
 
 template:
+  bootstrap: 5
   params:
     bootswatch: flatly
 
@@ -32,6 +34,11 @@ reference:
       - upsetSamples
       - listToMap
       - prepMultiAssay
+  - title: External Formats
+    desc: Compatibility with other Bioconductor packages
+    contents:
+      - saveHDF5MultiAssayExperiment
+      - MultiAssayExperimentToMAF
   - title: Misc. Package Docs
     desc: Other package information and data
     contents:
