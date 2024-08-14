@@ -1,84 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/MultiAssayExperiment.html</loc>
-  </url>
-  <url>
-    <loc>/articles/QuickStartMultiAssay.html</loc>
-  </url>
-  <url>
-    <loc>/articles/UsingHDF5Array.html</loc>
-  </url>
-  <url>
-    <loc>/articles/extras/MAE-curatedMetagenomicData.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ExperimentList-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ExperimentList.html</loc>
-  </url>
-  <url>
-    <loc>/reference/HDF5MultiAssayExperiment.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MatchedAssayExperiment-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MultiAssayExperiment-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MultiAssayExperiment-helpers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MultiAssayExperiment-methods.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MultiAssayExperiment-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MultiAssayExperiment.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MultiAssayExperimentToMAF.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hasAssay.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mapToList.html</loc>
-  </url>
-  <url>
-    <loc>/reference/miniACC.html</loc>
-  </url>
-  <url>
-    <loc>/reference/prepMultiAssay.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/subsetBy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/upsetSamples.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/404.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/articles/MultiAssayExperiment.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/articles/QuickStartMultiAssay.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/articles/UsingHDF5Array.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/articles/extras/MAE-curatedMetagenomicData.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/articles/index.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/authors.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/index.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/news/index.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/ExperimentList-class.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/ExperimentList.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/HDF5MultiAssayExperiment.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/MatchedAssayExperiment-class.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/MultiAssayExperiment-class.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/MultiAssayExperiment-helpers.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/MultiAssayExperiment-methods.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/MultiAssayExperiment-package.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/MultiAssayExperiment.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/MultiAssayExperimentToMAF.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/hasAssay.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/index.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/mapToList.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/miniACC.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/prepMultiAssay.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/reexports.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/subsetBy.html</loc></url>
+<url><loc>https://github.com/waldronlab/MultiAssayExperiment/reference/upsetSamples.html</loc></url>
 </urlset>
+
