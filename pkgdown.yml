@@ -6,7 +6,7 @@ articles:
   MultiAssayExperiment: MultiAssayExperiment.html
   QuickStartMultiAssay: QuickStartMultiAssay.html
   UsingHDF5Array: UsingHDF5Array.html
-last_built: 2024-08-14T16:05Z
+last_built: 2024-09-10T10:49Z
 urls:
   reference: https://github.com/waldronlab/MultiAssayExperiment/reference
   article: https://github.com/waldronlab/MultiAssayExperiment/articles
