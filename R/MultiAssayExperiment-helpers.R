@@ -34,18 +34,22 @@ NULL
 #'     measurements across all experiments and is guided by the replicated
 #'     return value
 #' * longFormat: A `MultiAssayExperiment` method that
-#'     returns a small and skinny [`DataFrame`]. The `colDataCols`
-#'     arguments allows the user to append `colData` columns to the data.
+#'     returns a small and skinny [`DataFrame`][S4Vectors::DataFrame-class]. The
+#'     `colDataCols` arguments allows the user to append `colData` columns to
+#'     the data.
 #' * wideFormat: A function to reshape the data in a
-#'     `MultiAssayExperiment` to a "wide" format [`DataFrame`]. Each row in
-#'     the `DataFrame` represents an observation (corresponding to an entry in
-#'     the `colData`). If replicates are present, their data will be appended at
+#'     `MultiAssayExperiment` to a "wide" format
+#'     [`DataFrame`][S4Vectors::DataFrame-class]. Each row in the `DataFrame`
+#'     represents an observation (corresponding to an entry in the `colData`).
+#'     If replicates are present, their data will be appended at
 #'     the end of the corresponding row and will generate additional `NA` data.
 #'     It is recommended to remove or consolidate technical replicates with
 #'     `mergeReplicates`. Optional `colDataCols` can be added when the
 #'     original object is a `MultiAssayExperiment`.
 #' * hasRowRanges: A function that identifies ExperimentList elements
-#'     that have a [`rowRanges`][RangedSummarizedExperiment-class] method
+#'     that have a
+#'     [`rowRanges`][SummarizedExperiment::RangedSummarizedExperiment-class]
+#'     method
 #' * getWithColData: A convenience function for extracting an assay
 #'     and associated colData
 #' * renamePrimary: A convenience function to rename the primary
@@ -111,9 +115,9 @@ setGeneric("replicated", function(x) standardGeneric("replicated"))
 #' @rdname MultiAssayExperiment-helpers
 #'
 #' @details The `replicated` function finds replicate measurements in each
-#' assay and returns a list of [`LogicalList`]s.
-#' Each element in a single [`LogicalList`] corresponds to a
-#' biological or _primary_ unit as in the `sampleMap`. Below is a
+#' assay and returns a list of [`LogicalList`][IRanges::AtomicList]s.
+#' Each element in a single [`LogicalList`][IRanges::AtomicList] corresponds to
+#' a biological or _primary_ unit as in the `sampleMap`. Below is a
 #' small graphic for one particular biological unit in one assay, where the
 #' logical vector corresponds to the number of measurements/samples in the
 #' assay:
@@ -127,8 +131,8 @@ setGeneric("replicated", function(x) standardGeneric("replicated"))
 #' replicate. _Note_. These methods are not available for the
 #' `ExperimentList` class due to a missing `sampleMap` structure
 #' (by design).
-#' `showReplicated` returns a list of [`CharacterList`]s where
-#' each element corresponds to the the biological or _primary_ units that
+#' `showReplicated` returns a list of [`CharacterList`][IRanges::AtomicList]s
+#' where each element corresponds to the the biological or _primary_ units that
 #' are replicated in that assay element. The values in the inner list are
 #' the `colnames` in the assay that are technical replicates.
 #'
@@ -188,9 +192,9 @@ setGeneric("replicates", function(x, ...) standardGeneric("replicates"))
 #'
 #' @details The `replicates` function (noun) returns the `colname`s
 #'   from the `sampleMap` that were identified as replicates. It returns a
-#'   list of [`CharacterList`]s for each assay present in the
-#'   `MultiAssayExperiment` and an inner entry for each biological unit
-#'   that has replicate observations in that assay.
+#'   list of [`CharacterList`][IRanges::AtomicList]s for each assay present in
+#'   the `MultiAssayExperiment` and an inner entry for each biological unit that
+#'   has replicate observations in that assay.
 #'
 #' @export
 setMethod("replicates", "MultiAssayExperiment", function(x, ...) {
@@ -240,7 +244,7 @@ setGeneric("mergeReplicates",
 #' multiple measurements on the **same** sample (within the same assay)
 #' and can therefore be averaged.
 #'
-#' @param replicates A list of [`LogicalList`]s
+#' @param replicates A list of [`LogicalList`][IRanges::AtomicList]s
 #' indicating multiple / duplicate entries for each biological unit per assay,
 #' see `replicated` (default `replicated(x)`).
 #' @param simplify A function for merging repeat measurements in experiments
@@ -264,9 +268,9 @@ setMethod("mergeReplicates", "MultiAssayExperiment",
 #' @describeIn ExperimentList Apply the mergeReplicates method on the
 #' ExperimentList elements
 #'
-#' @param replicates mergeReplicates: A `list` or [`LogicalList`]
-#' where each element represents a sample and a vector of repeated measurements
-#' for the sample
+#' @param replicates mergeReplicates: A `list` or
+#'   [`LogicalList`][IRanges::AtomicList] where each element represents a
+#'   sample and a vector of repeated measurements for the sample
 #'
 #' @param simplify A function for merging columns where duplicates are indicated
 #' by replicates
@@ -395,8 +399,10 @@ setMethod("mergeReplicates", "ANY",
 #' @aliases longFormat
 #'
 #' @details The `longFormat` "ANY" class method, works with classes such as
-#' [`ExpressionSet`] and [`SummarizedExperiment`] as well as `matrix`
-#' to provide a consistent long and skinny [`DataFrame`].
+#' [`ExpressionSet`][Biobase::ExpressionSet] and
+#' [`SummarizedExperiment`][SummarizedExperiment::SummarizedExperiment-class] as
+#' well as `matrix` to provide a consistent long and skinny
+#' [`DataFrame`][S4Vectors::DataFrame-class].
 #'
 #' @section longFormat:
 #' The 'longFormat' method takes data from the [`ExperimentList`]
@@ -602,7 +608,8 @@ wideFormat <- function(object, colDataCols = NULL, check.names = TRUE,
 #' @section hasRowRanges:
 #' The `hasRowRanges` method identifies assays with associated ranged
 #' row data by directly testing the method on the object. The result from the
-#' test must be a [`GRanges`] class object to satisfy the test.
+#' test must be a [`GRanges`][GenomicRanges::GRanges-class] class object to
+#' satisfy the test.
 #'
 #' @export hasRowRanges
 setGeneric("hasRowRanges", function(x) standardGeneric("hasRowRanges"))
@@ -610,8 +617,8 @@ setGeneric("hasRowRanges", function(x) standardGeneric("hasRowRanges"))
 #' @rdname MultiAssayExperiment-helpers
 #'
 #' @details The `hasRowRanges` method identifies assays that support
-#' a [`rowRanges`][RangedSummarizedExperiment-class] method _and_
-#' return a [`GRanges`] object.
+#' a [`rowRanges`][SummarizedExperiment::RangedSummarizedExperiment-class]
+#' method _and_ return a [`GRanges`][GenomicRanges::GRanges-class] object.
 setMethod("hasRowRanges", "MultiAssayExperiment", function(x) {
     hasRowRanges(experiments(x))
 })
@@ -636,7 +643,8 @@ setMethod("hasRowRanges", "ExperimentList", function(x) {
 #' [`colData`][SummarizedExperiment::SummarizedExperiment-class]
 #' along with the extracted object using the `colData<-` replacement
 #' method when possible. Typically, this method is available for
-#' [`SummarizedExperiment`] and `RaggedExperiment` classes.
+#' [`SummarizedExperiment`][SummarizedExperiment::SummarizedExperiment-class]
+#' and `RaggedExperiment` classes.
 #'
 #' The setting of `mode` determines how the `colData`
 #' is added. If `mode="append"`, the `MultiAssayExperiment`

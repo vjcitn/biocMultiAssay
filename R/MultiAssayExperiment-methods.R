@@ -55,8 +55,9 @@ NULL
 ### Getters
 ###
 
-#' @describeIn ExperimentList Get the dimension names for
-#' an `ExperimentList` using [`CharacterList`]
+#' @describeIn ExperimentList Get the dimension names for an `ExperimentList`
+#'   using [`CharacterList`][IRanges::AtomicList]
+#'
 #' @importFrom methods as
 #' @export
 setMethod("dimnames", "ExperimentList", function(x) {
@@ -67,7 +68,7 @@ setMethod("dimnames", "ExperimentList", function(x) {
 })
 
 #' @describeIn ExperimentList Get the column names for an `ExperimentList`
-#'   as a [`CharacterList`] slightly more efficiently
+#'   as a [`CharacterList`][IRanges::AtomicList] slightly more efficiently
 #'
 #' @importFrom BiocGenerics colnames
 #' @inheritParams BiocGenerics::colnames
@@ -80,7 +81,7 @@ setMethod("colnames", "ExperimentList",
 )
 
 #' @describeIn ExperimentList Get the row names for an `ExperimentList`
-#'   as a [`CharacterList`] slightly more efficiently
+#'   as a [`CharacterList`][IRanges::AtomicList] slightly more efficiently
 #'
 #' @importFrom BiocGenerics rownames
 #' @export

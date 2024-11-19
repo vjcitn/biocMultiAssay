@@ -23,11 +23,11 @@ NULL
 #' The `MultiAssayExperiment` class can be used to manage results of
 #' diverse assays on a collection of specimen. Currently,  the class can handle
 #' assays that are organized instances of
-#' [`SummarizedExperiment`],
-#' [`ExpressionSet`], `matrix`, `RaggedExperiment`
-#' (inherits from [`GRangesList`]), and `RangedVcfStack`.
-#' Create new `MultiAssayExperiment` instances with the homonymous
-#' constructor, minimally with the argument [`ExperimentList`],
+#' [`SummarizedExperiment`][SummarizedExperiment::SummarizedExperiment-class],
+#' [ExpressionSet][Biobase::ExpressionSet], `matrix`, `RaggedExperiment`
+#' (inherits from [`GRangesList`][GenomicRanges::GRangesList-class]), and
+#' `RangedVcfStack`. Create new `MultiAssayExperiment` instances with the
+#' homonymous constructor, minimally with the argument [`ExperimentList`],
 #' potentially also with the arguments `colData` (see section below) and
 #' [`sampleMap`].
 #'
@@ -41,18 +41,19 @@ NULL
 #' * assay: may contain withDimnames, which is forwarded to assays
 #' * combining **c**: compatible `MultiAssayExperiment` classes
 #'     passed on to the [`ExperimentList`] constructor,
-#'     can be a `list`, [`List`], or a series of
+#'     can be a `list`, [`List`][S4Vectors::List-class], or a series of
 #'     named arguments. See the examples below.
 #'
 #' @section colData:
 #' The `colData` slot is a collection of primary specimen data valid
 #' across all experiments. This slot is strictly of class
-#' [`DataFrame`] but arguments for the constructor function
-#' allow arguments to be of class `data.frame` and subsequently coerced.
+#' [`DataFrame`][S4Vectors::DataFrame-class] but arguments for the constructor
+#' function allow arguments to be of class `data.frame` and subsequently
+#' coerced.
 #'
 #' @section ExperimentList:
-#' The [`ExperimentList`] slot is designed to contain results from
-#' each experiment/assay. It contains a [`SimpleList`].
+#' The [`ExperimentList`] slot is designed to contain results from each
+#' experiment/assay. It contains a [`SimpleList`][S4Vectors::SimpleList-class].
 #'
 #' @section sampleMap:
 #' The [`sampleMap`] contains a `DataFrame` of translatable
@@ -258,10 +259,10 @@ setClass(
 #' the colnames in the experiments if no sampleMap is provided.
 #'
 #' @section experiments:
-#' The `experiments` input can be of class [`SimpleList`] or `list`.
-#' This input becomes the [`ExperimentList`]. Each element of the
-#' input `list` or `List` must be named, rectangular with two dimensions, and
-#' have `dimnames`.
+#' The `experiments` input can be of class
+#' [`SimpleList`][S4Vectors::SimpleList-class] or `list`. This input becomes the
+#' [`ExperimentList`]. Each element of the input `list` or `List` must be named,
+#' rectangular with two dimensions, and have `dimnames`.
 #'
 #' @section sampleMap:
 #' The [`sampleMap`] can either be input as `DataFrame` or
@@ -283,11 +284,11 @@ setClass(
 #' @param experiments A `list` or [`ExperimentList`] of all
 #' combined experiments
 #'
-#' @param colData A [`DataFrame`] or \code{data.frame} of
-#' characteristics for all biological units
+#' @param colData A [`DataFrame`][S4Vectors::DataFrame-class] or
+#'   \code{data.frame} of characteristics for all biological units
 #'
-#' @param sampleMap A `DataFrame` or \code{data.frame} of assay names,
-#' sample identifiers, and colname samples
+#' @param sampleMap A [`DataFrame`][S4Vectors::DataFrame-class] or
+#'   \code{data.frame} of assay names, sample identifiers, and colname samples
 #'
 #' @param metadata An optional argument of "ANY" class (usually list) for
 #' content describing the experiments
@@ -518,10 +519,10 @@ setMethod("show", "MultiAssayExperiment", function(object) {
 #' Setter method values (i.e., '\code{function(x) <- value}'):
 #' * experiments<-: An [`ExperimentList`] object
 #'     containing experiment data of supported classes
-#' * sampleMap<-: A [`DataFrame`] object relating
+#' * sampleMap<-: A [`DataFrame`][S4Vectors::DataFrame-class] object relating
 #'     samples to biological units and assays
-#' * colData<-: A [`DataFrame`] object describing the
-#'     biological units
+#' * colData<-: A [`DataFrame`][S4Vectors::DataFrame-class] object describing
+#'     the biological units
 #' * metadata<-: A `list` object of metadata
 #' * `[[<-`: Equivalent to the \code{experiments<-} setter method for
 #'     convenience
@@ -906,7 +907,8 @@ setMethod("updateObject", "MultiAssayExperiment",
 #'   Convert a `list` or S4 `List` to a MultiAssayExperiment object using the
 #'   [methods::as] function.
 #'
-#' In the following example, `x` is either a `list` or [`List`]:
+#' In the following example, `x` is either a `list` or
+#' [`List`][S4Vectors::List-class]:
 #'
 #'   `as(x, "MultiAssayExperiment")`
 #'

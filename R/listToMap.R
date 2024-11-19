@@ -4,7 +4,7 @@
 #' @param fill `logical(1)` Whether to fill the map with an empty `DataFrame`
 #'   when empty elements are present in the input list
 #'
-#' @return A [`DataFrame`] class object of names
+#' @return A [`DataFrame`][S4Vectors::DataFrame-class] class object of names
 #' @describeIn mapToList The inverse of the listToMap operation
 #' @export listToMap
 listToMap <- function(listmap, fill = TRUE) {

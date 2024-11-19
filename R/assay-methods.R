@@ -105,8 +105,9 @@ setMethod("assay", c("ExperimentList", "character"),
     }
 )
 
-#' @describeIn MultiAssayExperiment Obtain a [`SimpleList`] of assay
-#' data for all available experiments in the object
+#' @describeIn MultiAssayExperiment Obtain a
+#'   [`SimpleList`][S4Vectors::SimpleList-class] of assay data for all available
+#'   experiments in the object
 #' @param withDimnames logical (default TRUE) whether to return dimension names
 #' included in the object
 #' @exportMethod assays

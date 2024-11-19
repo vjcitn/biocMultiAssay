@@ -91,11 +91,11 @@ A \code{MultiAssayExperiment} object
 The \code{MultiAssayExperiment} class can be used to manage results of
 diverse assays on a collection of specimen. Currently,  the class can handle
 assays that are organized instances of
-\code{\link{SummarizedExperiment}},
-\code{\link{ExpressionSet}}, \code{matrix}, \code{RaggedExperiment}
-(inherits from \code{\link{GRangesList}}), and \code{RangedVcfStack}.
-Create new \code{MultiAssayExperiment} instances with the homonymous
-constructor, minimally with the argument \code{\link{ExperimentList}},
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment}},
+\link[Biobase:class.ExpressionSet]{ExpressionSet}, \code{matrix}, \code{RaggedExperiment}
+(inherits from \code{\link[GenomicRanges:GRangesList-class]{GRangesList}}), and
+\code{RangedVcfStack}. Create new \code{MultiAssayExperiment} instances with the
+homonymous constructor, minimally with the argument \code{\link{ExperimentList}},
 potentially also with the arguments \code{colData} (see section below) and
 \code{\link{sampleMap}}.
 }
@@ -110,7 +110,7 @@ functional argument
 \item assay: may contain withDimnames, which is forwarded to assays
 \item combining \strong{c}: compatible \code{MultiAssayExperiment} classes
 passed on to the \code{\link{ExperimentList}} constructor,
-can be a \code{list}, \code{\link{List}}, or a series of
+can be a \code{list}, \code{\link[S4Vectors:List-class]{List}}, or a series of
 named arguments. See the examples below.
 }
 }
@@ -135,8 +135,9 @@ for a \code{MultiAssayExperiment} object
 \item \code{exportClass(MultiAssayExperiment)}: Export data from class to a series
 of text files
 
-\item \code{assays(MultiAssayExperiment)}: Obtain a \code{\link{SimpleList}} of assay
-data for all available experiments in the object
+\item \code{assays(MultiAssayExperiment)}: Obtain a
+\code{\link[S4Vectors:SimpleList-class]{SimpleList}} of assay data for all available
+experiments in the object
 
 \item \code{assay(x = MultiAssayExperiment, i = missing)}: Convenience function for extracting the
 assay of the first element (default) in the \code{ExperimentList}. A \code{numeric}
@@ -165,14 +166,15 @@ of samples and participants}
 
 The \code{colData} slot is a collection of primary specimen data valid
 across all experiments. This slot is strictly of class
-\code{\link{DataFrame}} but arguments for the constructor function
-allow arguments to be of class \code{data.frame} and subsequently coerced.
+\code{\link[S4Vectors:DataFrame-class]{DataFrame}} but arguments for the constructor
+function allow arguments to be of class \code{data.frame} and subsequently
+coerced.
 }
 
 \section{ExperimentList}{
 
-The \code{\link{ExperimentList}} slot is designed to contain results from
-each experiment/assay. It contains a \code{\link{SimpleList}}.
+The \code{\link{ExperimentList}} slot is designed to contain results from each
+experiment/assay. It contains a \code{\link[S4Vectors:SimpleList-class]{SimpleList}}.
 }
 
 \section{sampleMap}{
@@ -198,7 +200,8 @@ An empty \code{sampleMap} may produce empty experiments if the levels of the
 Convert a \code{list} or S4 \code{List} to a MultiAssayExperiment object using the
 \link[methods:as]{methods::as} function.
 
-In the following example, \code{x} is either a \code{list} or \code{\link{List}}:
+In the following example, \code{x} is either a \code{list} or
+\code{\link[S4Vectors:List-class]{List}}:
 
 \code{as(x, "MultiAssayExperiment")}
 

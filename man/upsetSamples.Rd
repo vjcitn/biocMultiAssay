@@ -33,7 +33,7 @@ Options include frequency (entered as "freq"), degree, or both in any order.}
 \item{check.names}{\code{logical(1)} Whether to munge names as in the
 \code{data.frame()} constructor (default FALSE).}
 
-\item{...}{parameters passed to \code{\link[UpSetR:upset]{UpSetR::upset}}}
+\item{...}{parameters passed to \link[UpSetR:upset]{UpSetR::upset}}
 }
 \value{
 Produces a visualization of set intersections using the UpSet matrix

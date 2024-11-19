@@ -201,7 +201,7 @@ coerceToExperimentList <- function(from) {
 #'  `as()` function.
 #'
 #'  In the following example, `x` is either a `list` or
-#'  [`List`]:
+#'  [`List`][S4Vectors::List-class]:
 #'
 #'  \preformatted{    as(x, "ExperimentList")}
 #'

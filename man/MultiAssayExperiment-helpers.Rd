@@ -100,7 +100,7 @@ makeHitList(x, patternList)
 
 \item{x}{A MultiAssayExperiment or ExperimentList}
 
-\item{replicates}{A list of \code{\link{LogicalList}}s
+\item{replicates}{A list of \code{\link[IRanges:AtomicList-class]{LogicalList}}s
 indicating multiple / duplicate entries for each biological unit per assay,
 see \code{replicated} (default \code{replicated(x)}).}
 
@@ -175,18 +175,22 @@ rowname) in the \code{sampleMap}
 measurements across all experiments and is guided by the replicated
 return value
 \item longFormat: A \code{MultiAssayExperiment} method that
-returns a small and skinny \code{\link{DataFrame}}. The \code{colDataCols}
-arguments allows the user to append \code{colData} columns to the data.
+returns a small and skinny \code{\link[S4Vectors:DataFrame-class]{DataFrame}}. The
+\code{colDataCols} arguments allows the user to append \code{colData} columns to
+the data.
 \item wideFormat: A function to reshape the data in a
-\code{MultiAssayExperiment} to a "wide" format \code{\link{DataFrame}}. Each row in
-the \code{DataFrame} represents an observation (corresponding to an entry in
-the \code{colData}). If replicates are present, their data will be appended at
+\code{MultiAssayExperiment} to a "wide" format
+\code{\link[S4Vectors:DataFrame-class]{DataFrame}}. Each row in the \code{DataFrame}
+represents an observation (corresponding to an entry in the \code{colData}).
+If replicates are present, their data will be appended at
 the end of the corresponding row and will generate additional \code{NA} data.
 It is recommended to remove or consolidate technical replicates with
 \code{mergeReplicates}. Optional \code{colDataCols} can be added when the
 original object is a \code{MultiAssayExperiment}.
 \item hasRowRanges: A function that identifies ExperimentList elements
-that have a \code{\link[=RangedSummarizedExperiment-class]{rowRanges}} method
+that have a
+\code{\link[SummarizedExperiment:RangedSummarizedExperiment-class]{rowRanges}}
+method
 \item getWithColData: A convenience function for extracting an assay
 and associated colData
 \item renamePrimary: A convenience function to rename the primary
@@ -197,9 +201,9 @@ of a particular assay
 }
 \details{
 The \code{replicated} function finds replicate measurements in each
-assay and returns a list of \code{\link{LogicalList}}s.
-Each element in a single \code{\link{LogicalList}} corresponds to a
-biological or \emph{primary} unit as in the \code{sampleMap}. Below is a
+assay and returns a list of \code{\link[IRanges:AtomicList-class]{LogicalList}}s.
+Each element in a single \code{\link[IRanges:AtomicList-class]{LogicalList}} corresponds to
+a biological or \emph{primary} unit as in the \code{sampleMap}. Below is a
 small graphic for one particular biological unit in one assay, where the
 logical vector corresponds to the number of measurements/samples in the
 assay:
@@ -213,16 +217,16 @@ assay:
 replicate. \emph{Note}. These methods are not available for the
 \code{ExperimentList} class due to a missing \code{sampleMap} structure
 (by design).
-\code{showReplicated} returns a list of \code{\link{CharacterList}}s where
-each element corresponds to the the biological or \emph{primary} units that
+\code{showReplicated} returns a list of \code{\link[IRanges:AtomicList-class]{CharacterList}}s
+where each element corresponds to the the biological or \emph{primary} units that
 are replicated in that assay element. The values in the inner list are
 the \code{colnames} in the assay that are technical replicates.
 
 The \code{replicates} function (noun) returns the \code{colname}s
 from the \code{sampleMap} that were identified as replicates. It returns a
-list of \code{\link{CharacterList}}s for each assay present in the
-\code{MultiAssayExperiment} and an inner entry for each biological unit
-that has replicate observations in that assay.
+list of \code{\link[IRanges:AtomicList-class]{CharacterList}}s for each assay present in
+the \code{MultiAssayExperiment} and an inner entry for each biological unit that
+has replicate observations in that assay.
 
 The \code{mergeReplicates} function is a house-keeping method
 for a \code{MultiAssayExperiment} where only \code{complete.cases} are
@@ -239,12 +243,14 @@ user to provide additional arguments to the \code{simplify} functional
 argument.
 
 The \code{longFormat} "ANY" class method, works with classes such as
-\code{\link{ExpressionSet}} and \code{\link{SummarizedExperiment}} as well as \code{matrix}
-to provide a consistent long and skinny \code{\link{DataFrame}}.
+\code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} and
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment}} as
+well as \code{matrix} to provide a consistent long and skinny
+\code{\link[S4Vectors:DataFrame-class]{DataFrame}}.
 
 The \code{hasRowRanges} method identifies assays that support
-a \code{\link[=RangedSummarizedExperiment-class]{rowRanges}} method \emph{and}
-return a \code{\link{GRanges}} object.
+a \code{\link[SummarizedExperiment:RangedSummarizedExperiment-class]{rowRanges}}
+method \emph{and} return a \code{\link[GenomicRanges:GRanges-class]{GRanges}} object.
 }
 \section{mergeReplicates}{
 
@@ -289,7 +295,8 @@ See the \code{wideFormat} section for description of the \code{colDataCols} and
 
 The \code{hasRowRanges} method identifies assays with associated ranged
 row data by directly testing the method on the object. The result from the
-test must be a \code{\link{GRanges}} class object to satisfy the test.
+test must be a \code{\link[GenomicRanges:GRanges-class]{GRanges}} class object to
+satisfy the test.
 }
 
 \section{getWithColData}{
@@ -300,7 +307,8 @@ will also attempt to provide the
 \code{\link[SummarizedExperiment:SummarizedExperiment-class]{colData}}
 along with the extracted object using the \verb{colData<-} replacement
 method when possible. Typically, this method is available for
-\code{\link{SummarizedExperiment}} and \code{RaggedExperiment} classes.
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment}}
+and \code{RaggedExperiment} classes.
 
 The setting of \code{mode} determines how the \code{colData}
 is added. If \code{mode="append"}, the \code{MultiAssayExperiment}

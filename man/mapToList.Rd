@@ -23,7 +23,7 @@ identifiers in the first column}
 names column}
 }
 \value{
-A \code{\link{DataFrame}} class object of names
+A \code{\link[S4Vectors:DataFrame-class]{DataFrame}} class object of names
 
 A \code{list} object of DataFrames for each assay
 }

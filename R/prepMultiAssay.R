@@ -29,10 +29,10 @@
 #' necessary.
 #'
 #' @param ExperimentList A `list` of all combined experiments
-#' @param colData A [`DataFrame`] of the phenotype
+#' @param colData A [`DataFrame`][S4Vectors::DataFrame-class] of the phenotype
 #' data for all participants
-#' @param sampleMap A [`DataFrame`] of sample identifiers, assay
-#' samples, and assay names
+#' @param sampleMap A [`DataFrame`][S4Vectors::DataFrame-class] of sample
+#'   identifiers, assay samples, and assay names
 #' @param ... Optional arguments for the `MultiAssayExperiment` constructor
 #' function such as `metadata` and `drops`.
 #' @return A `list` containing all the essential components of a

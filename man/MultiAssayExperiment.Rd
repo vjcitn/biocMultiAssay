@@ -18,11 +18,11 @@ MultiAssayExperiment(
 \item{experiments}{A \code{list} or \code{\link{ExperimentList}} of all
 combined experiments}
 
-\item{colData}{A \code{\link{DataFrame}} or \code{data.frame} of
-characteristics for all biological units}
+\item{colData}{A \code{\link[S4Vectors:DataFrame-class]{DataFrame}} or
+\code{data.frame} of characteristics for all biological units}
 
-\item{sampleMap}{A \code{DataFrame} or \code{data.frame} of assay names,
-sample identifiers, and colname samples}
+\item{sampleMap}{A \code{\link[S4Vectors:DataFrame-class]{DataFrame}} or
+\code{data.frame} of assay names, sample identifiers, and colname samples}
 
 \item{metadata}{An optional argument of "ANY" class (usually list) for
 content describing the experiments}
@@ -50,10 +50,10 @@ the colnames in the experiments if no sampleMap is provided.
 
 \section{experiments}{
 
-The \code{experiments} input can be of class \code{\link{SimpleList}} or \code{list}.
-This input becomes the \code{\link{ExperimentList}}. Each element of the
-input \code{list} or \code{List} must be named, rectangular with two dimensions, and
-have \code{dimnames}.
+The \code{experiments} input can be of class
+\code{\link[S4Vectors:SimpleList-class]{SimpleList}} or \code{list}. This input becomes the
+\code{\link{ExperimentList}}. Each element of the input \code{list} or \code{List} must be named,
+rectangular with two dimensions, and have \code{dimnames}.
 }
 
 \section{sampleMap}{

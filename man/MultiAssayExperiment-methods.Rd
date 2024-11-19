@@ -108,10 +108,10 @@ Setter method values (i.e., '\code{function(x) <- value}'):
 \itemize{
 \item experiments<-: An \code{\link{ExperimentList}} object
 containing experiment data of supported classes
-\item sampleMap<-: A \code{\link{DataFrame}} object relating
+\item sampleMap<-: A \code{\link[S4Vectors:DataFrame-class]{DataFrame}} object relating
 samples to biological units and assays
-\item colData<-: A \code{\link{DataFrame}} object describing the
-biological units
+\item colData<-: A \code{\link[S4Vectors:DataFrame-class]{DataFrame}} object describing
+the biological units
 \item metadata<-: A \code{list} object of metadata
 \item \verb{[[<-}: Equivalent to the \code{experiments<-} setter method for
 convenience

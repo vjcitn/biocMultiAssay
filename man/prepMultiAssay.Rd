@@ -9,11 +9,11 @@ prepMultiAssay(ExperimentList, colData, sampleMap, ...)
 \arguments{
 \item{ExperimentList}{A \code{list} of all combined experiments}
 
-\item{colData}{A \code{\link{DataFrame}} of the phenotype
+\item{colData}{A \code{\link[S4Vectors:DataFrame-class]{DataFrame}} of the phenotype
 data for all participants}
 
-\item{sampleMap}{A \code{\link{DataFrame}} of sample identifiers, assay
-samples, and assay names}
+\item{sampleMap}{A \code{\link[S4Vectors:DataFrame-class]{DataFrame}} of sample
+identifiers, assay samples, and assay names}
 
 \item{...}{Optional arguments for the \code{MultiAssayExperiment} constructor
 function such as \code{metadata} and \code{drops}.}

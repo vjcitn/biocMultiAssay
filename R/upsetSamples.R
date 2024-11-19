@@ -9,7 +9,7 @@
 #' @param sets `character()` A character vector of names in MultiAssayExperiment
 #' to use. If specified, `nsets` will be ignored.
 #'
-#' @param ... parameters passed to [`UpSetR::upset`]
+#' @param ... parameters passed to [UpSetR::upset]
 #'
 #' @param check.names `logical(1)` Whether to munge names as in the
 #' `data.frame()` constructor (default FALSE).
