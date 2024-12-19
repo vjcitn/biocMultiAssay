@@ -44,10 +44,14 @@ NULL
 }
 
 .matchReorderSub <- function(assayMap, identifiers) {
-    positions <-
-        unlist(lapply(identifiers, function(ident) {
-            which(!is.na(match(assayMap[["primary"]], ident)))
-        }))
+    positions <- unlist(
+        lapply(
+            identifiers,
+            function(ident) {
+                which(!is.na(match(assayMap[["primary"]], ident)))
+            }
+        )
+    )
     assayMap[positions, ]
 }
 
