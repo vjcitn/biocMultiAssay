@@ -340,9 +340,20 @@ setMethod("mergeReplicates", "ANY",
         return(object)
 })
 
-# longFormat function -----------------------------------------------------
 
-.longFormatANY <- function(object, i) {
+# longFormat generic and methods ------------------------------------------
+
+#' @rdname MultiAssayExperiment-helpers
+#' @aliases longFormat
+setGeneric(
+    "longFormat",
+    function(object, colDataCols = NULL, i = 1L, ...)
+    standardGeneric("longFormat")
+)
+
+#' @rdname MultiAssayExperiment-helpers
+#' @exportMethod longFormat
+setMethod("longFormat", "ANY", function(object, colDataCols, i = 1L, ...) {
     rowNAMES <- rownames(object)
     if (is.null(rowNAMES))
         rowNames <- as.character(seq_len(nrow(object)))
@@ -360,19 +371,32 @@ setMethod("mergeReplicates", "ANY",
     if (!is.character(res[["rowname"]]))
         res[["rowname"]] <- as.character(res[["rowname"]])
     res
-}
+})
 
-.longFormatElist <- function(object, i) {
-    if (!is(object, "ExperimentList"))
-        stop("<internal> Not an 'ExperimentList' input")
-    samelength <- identical(length(object), length(i))
-    if (!samelength && identical(length(i), 1L))
-        i <- rep(i, length(object))
-    mapply(function(obj, obname, idx) {
-        data.frame(assay = obname, .longFormatANY(obj, i = idx),
-            stringsAsFactors = FALSE)
-        }, obj = object, obname = names(object), idx = i, SIMPLIFY = FALSE)
-}
+#' @rdname MultiAssayExperiment-helpers
+#' @exportMethod longFormat
+setMethod(
+    "longFormat", "ExperimentList",
+    function(object, colDataCols, i = 1L, ...) {
+        samelength <- identical(length(object), length(i))
+        if (!samelength && identical(length(i), 1L))
+            i <- rep(i, length(object))
+        res <- mapply(
+            function(obj, obname, idx) {
+                data.frame(
+                    assay = obname,
+                    longFormat(obj, i = idx),
+                    stringsAsFactors = FALSE
+                )
+            }, obj = object, obname = names(object), idx = i, SIMPLIFY = FALSE
+        )
+
+        do.call(
+            function(...) rbind(..., make.row.names = FALSE),
+            res
+        )
+    }
+)
 
 .matchAddColData <- function(reshaped, colData, colDataCols) {
     extraColumns <- as.data.frame(colData[, colDataCols, drop = FALSE])
@@ -394,8 +418,6 @@ setMethod("mergeReplicates", "ANY",
 }
 
 #' @rdname MultiAssayExperiment-helpers
-#'
-#' @aliases longFormat
 #'
 #' @details The `longFormat` "ANY" class method, works with classes such as
 #' [`ExpressionSet`][Biobase::ExpressionSet] and
@@ -425,31 +447,24 @@ setMethod("mergeReplicates", "ANY",
 #'     renameColname: Either a `numeric` or `character` index
 #'     indicating the assay whose colnames are to be renamed
 #'
-#' @param mode String indicating how `MultiAssayExperiment`
-#'     column-level metadata should be added to the
-#'     `SummarizedExperiment` `colData`.
-#'
-#' @export longFormat
-longFormat <- function(object, colDataCols = NULL, i = 1L) {
-    if (is(object, "ExperimentList"))
-        return(do.call(rbind, .longFormatElist(object, i = i)))
-    else if (!is(object, "MultiAssayExperiment"))
-        return(.longFormatANY(object, i = i))
+#' @exportMethod longFormat
+setMethod(
+    "longFormat", "MultiAssayExperiment",
+    function(object, colDataCols = NULL, i = 1L, ...) {
+        if (any(.emptyAssays(experiments(object))))
+            object <- .dropEmpty(object, warn = FALSE)
 
-    if (any(.emptyAssays(experiments(object))))
-        object <- .dropEmpty(object, warn = FALSE)
+        longDataFrame <- longFormat(experiments(object), i = i)
 
-    longDataFrame <- do.call(function(...) rbind(..., make.row.names = FALSE),
-        .longFormatElist(experiments(object), i = i))
+        longDataFrame <- .mapOrderPrimary(longDataFrame, sampleMap(object))
 
-    longDataFrame <- .mapOrderPrimary(longDataFrame, sampleMap(object))
+        if (!is.null(colDataCols))
+            longDataFrame <-
+                .matchAddColData(longDataFrame, colData(object), colDataCols)
 
-    if (!is.null(colDataCols))
-        longDataFrame <-
-            .matchAddColData(longDataFrame, colData(object), colDataCols)
-
-    as(longDataFrame, "DataFrame")
-}
+        as(longDataFrame, "DataFrame")
+    }
+)
 
 # wideformat function -----------------------------------------------------
 
@@ -535,7 +550,8 @@ wideFormat <- function(object, colDataCols = NULL, check.names = TRUE,
     if (is.null(colDataCols)) colDataCols <- character(0L)
     nameFUN <- if (check.names) make.names else I
     cnames <- colnames(object)
-    longList <- .longFormatElist(experiments(object), i = i)
+    longDataFrame <- longFormat(experiments(object), i = i)
+    longList <- split(longDataFrame, longDataFrame[["assay"]])
     longList <- lapply(longList, .mapOrderPrimary, sampleMap(object))
     colsofinterest <- c("assay", "rowname")
 
@@ -629,6 +645,10 @@ setMethod("hasRowRanges", "ExperimentList", function(x) {
 })
 
 #' @rdname MultiAssayExperiment-helpers
+#'
+#' @param mode String indicating how `MultiAssayExperiment`
+#'     column-level metadata should be added to the
+#'     `SummarizedExperiment` `colData`.
 #'
 #' @param verbose `logical(1)` Whether to `suppressMessages` on subsetting
 #'     operations in `getWithColData` (default FALSE)
@@ -757,7 +777,6 @@ renamePrimary <- function(x, value) {
 #' mae2 <- renameColname(mae, i = "Affy", paste0("ARRAY", 1:4))
 #' colnames(mae2)
 #' sampleMap(mae2)
-#'
 #'
 #' @export renameColname
 renameColname <- function(x, i, value) {

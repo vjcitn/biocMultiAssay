@@ -18,6 +18,9 @@
 \alias{mergeReplicates,MultiAssayExperiment-method}
 \alias{mergeReplicates,ANY-method}
 \alias{longFormat}
+\alias{longFormat,ANY-method}
+\alias{longFormat,ExperimentList-method}
+\alias{longFormat,MultiAssayExperiment-method}
 \alias{wideFormat}
 \alias{hasRowRanges}
 \alias{hasRowRanges,MultiAssayExperiment-method}
@@ -67,7 +70,13 @@ mergeReplicates(x, replicates = list(), simplify = BiocGenerics::mean, ...)
 
 \S4method{mergeReplicates}{ANY}(x, replicates = list(), simplify = BiocGenerics::mean, ...)
 
-longFormat(object, colDataCols = NULL, i = 1L)
+longFormat(object, colDataCols = NULL, i = 1L, ...)
+
+\S4method{longFormat}{ANY}(object, colDataCols = NULL, i = 1L, ...)
+
+\S4method{longFormat}{ExperimentList}(object, colDataCols = NULL, i = 1L, ...)
+
+\S4method{longFormat}{MultiAssayExperiment}(object, colDataCols = NULL, i = 1L, ...)
 
 wideFormat(
   object,
@@ -362,7 +371,6 @@ sampleMap(mae2)
 mae2 <- renameColname(mae, i = "Affy", paste0("ARRAY", 1:4))
 colnames(mae2)
 sampleMap(mae2)
-
 
 
 patts <- list(

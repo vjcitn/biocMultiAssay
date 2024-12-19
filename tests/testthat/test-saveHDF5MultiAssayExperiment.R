@@ -29,6 +29,10 @@ test_that("saveHDF5MultiAssayExperiment is working", {
 })
 
 test_that("prefix argument works as intended", {
+    env <- new.env(parent = emptyenv())
+    data("miniACC",  envir = env)
+    miniACC <- env[["miniACC"]]
+
     testDir <- file.path(tempdir(), "test_mae")
     saveHDF5MultiAssayExperiment(
         miniACC, dir = testDir, prefix = "", replace = TRUE
@@ -85,7 +89,7 @@ test_that("loadHDF5MultiAssayExperiment is working", {
 
     testDir <- file.path(tempdir(), "test_mae")
     on.exit(unlink(testDir, recursive = TRUE))
-    
+
     saveHDF5MultiAssayExperiment(
         miniACC, prefix = "", dir = testDir, replace = TRUE
     )
@@ -105,7 +109,7 @@ test_that("loadHDF5MultiAssayExperiment prefix input is consistent", {
 
     testDir <- file.path(tempdir(), "test_mae")
     on.exit(unlink(testDir, recursive = TRUE))
-    
+
     saveHDF5MultiAssayExperiment(
         miniACC, prefix = "test", dir = testDir, replace = TRUE
     )

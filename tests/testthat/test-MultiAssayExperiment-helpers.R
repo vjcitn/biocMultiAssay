@@ -240,7 +240,7 @@ test_that("renaming helpers work", {
 })
 
 
-test_that(".longFormatANY works", {
+test_that("longFormat,ANY-method works", {
     denv <- new.env(parent = emptyenv())
     data("miniACC", package="MultiAssayExperiment", envir = denv)
     miniACC <- denv[["miniACC"]]
