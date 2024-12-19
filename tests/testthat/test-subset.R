@@ -163,6 +163,17 @@ test_that("subsetByColData works as intended", {
     )
 })
 
+test_that(".matchReorderSub keeps order of ids", {
+    assayMap <- DataFrame(primary = letters[1:4], colname = letters[1:4])
+    identifiers <- c("c", "a", "b", "f")
+    ids <- intersect(identifiers, assayMap[["primary"]])
+    ## order in identifiers takes precedence
+    expect_identical(
+        .matchReorderSub(assayMap, ids),
+        DataFrame(primary = c("c", "a", "b"), colname = c("c", "a", "b"))
+    )
+})
+
 test_that("MultiAssayExperiment subsetting works with NULL rownames", {
     nrows <- 200
     ncols <- 6
