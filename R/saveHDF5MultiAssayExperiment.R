@@ -3,8 +3,8 @@
 
 .load_HDF5Array_package <- function()
 {
-    if (!requireNamespace("HDF5Array", quietly=TRUE))
-        stop("Please install the 'HDF5Array' package to use this function")
+    BiocBaseUtils::checkInstalled("HDF5Array")
+    requireNamespace("HDF5Array", quietly = TRUE)
 }
 
 .isSingleString <- S4Vectors::isSingleString

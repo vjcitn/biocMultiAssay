@@ -42,8 +42,7 @@ upsetSamples <- function(
     MultiAssayExperiment, nsets = NULL, sets = names(MultiAssayExperiment),
     nintersects = NA_integer_, order.by = "freq", check.names = FALSE, ...
 ) {
-    if (!requireNamespace("UpSetR", quietly = TRUE))
-        stop("Please install the 'UpSetR' package to use 'upsetSamples()'")
+    BiocBaseUtils::checkInstalled("UpSetR")
     mae <- MultiAssayExperiment
     datf <- do.call(
         function(...) { data.frame(..., check.names = check.names) },

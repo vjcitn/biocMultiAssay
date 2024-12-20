@@ -32,8 +32,7 @@
 MultiAssayExperimentToMAF <-
     function(x, synAssay = "maf_syn", nonSynAssay = "maf_nonSyn")
 {
-    if (!requireNamespace("maftools", quietly = TRUE))
-        stop("Install the 'maftools' package to convert to MAF")
+    BiocBaseUtils::checkInstalled("maftools")
 
     ns <- nonSynAssay %in% names(x)
     sy <- synAssay %in% names(x)

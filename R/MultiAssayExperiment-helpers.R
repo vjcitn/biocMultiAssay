@@ -352,8 +352,7 @@ setMethod("mergeReplicates", "ANY",
     if (is(object, "SummarizedExperiment") || is(object, "RaggedExperiment"))
         object <- assay(object, i = i)
 
-    if (!requireNamespace("reshape2", quietly = TRUE))
-        stop("Package 'reshape2' is required for 'longFormat()' conversion")
+    BiocBaseUtils::checkInstalled("reshape2")
 
     res <- reshape2::melt(
         object, varnames = c("rowname", "colname"), value.name = "value"
