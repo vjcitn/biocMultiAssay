@@ -345,6 +345,7 @@ setMethod("mergeReplicates", "ANY",
 
 #' @rdname MultiAssayExperiment-helpers
 #' @aliases longFormat
+#' @export
 setGeneric(
     "longFormat",
     function(object, colDataCols = NULL, i = 1L, ...)
