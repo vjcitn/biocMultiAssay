@@ -49,10 +49,6 @@ jobs:
           BiocManager::install(c("rcmdcheck", "pkgdown", "covr"), ask = FALSE, update = TRUE)
         shell: Rscript {0}
 
-      - name: System dependencies
-        run: |
-          pip install ghp-import
-
       - name: Check Package
         id: rcmdcheck
         env:
@@ -73,15 +69,17 @@ jobs:
         run: |
            PATH=$PATH:$HOME/bin/ Rscript -e 'pkgdown::build_site()'
 
-      - name: Install deploy dependencies
-        run: |
-          apt-get update
-          apt-get -y install rsync
+  deploy:
+    needs: checkRelease
+    permissions:
+      contents: write
+      pages: write
+    runs-on: ubuntu-latest
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: docs # The folder the action should deploy.
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
