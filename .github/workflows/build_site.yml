@@ -9,10 +9,6 @@ on:
       - 'DESCRIPTION'
       - '**.yml'
 
-permissions:
-  id-token: write
-  pages: write
-
 env:
   R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
   GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -82,6 +78,8 @@ jobs:
     needs: checkRelease
     permissions:
       contents: write
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
 
     steps:
