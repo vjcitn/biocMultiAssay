@@ -69,6 +69,11 @@ jobs:
         run: |
            PATH=$PATH:$HOME/bin/ Rscript -e 'pkgdown::build_site()'
 
+      - name: Upload pkgdown artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
   deploy:
     needs: checkRelease
     permissions:
@@ -77,9 +82,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
