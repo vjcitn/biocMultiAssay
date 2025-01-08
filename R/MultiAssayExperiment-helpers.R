@@ -348,13 +348,13 @@ setMethod("mergeReplicates", "ANY",
 #' @export
 setGeneric(
     "longFormat",
-    function(object, colDataCols = NULL, i = 1L, ...)
+    function(object, i = 1L, ...)
     standardGeneric("longFormat")
 )
 
 #' @rdname MultiAssayExperiment-helpers
 #' @exportMethod longFormat
-setMethod("longFormat", "ANY", function(object, colDataCols, i = 1L, ...) {
+setMethod("longFormat", "ANY", function(object, i = 1L, ...) {
     rowNAMES <- rownames(object)
     if (is.null(rowNAMES))
         rowNames <- as.character(seq_len(nrow(object)))
@@ -378,7 +378,7 @@ setMethod("longFormat", "ANY", function(object, colDataCols, i = 1L, ...) {
 #' @exportMethod longFormat
 setMethod(
     "longFormat", "ExperimentList",
-    function(object, colDataCols, i = 1L, ...) {
+    function(object, i = 1L, ...) {
         samelength <- identical(length(object), length(i))
         if (!samelength && identical(length(i), 1L))
             i <- rep(i, length(object))
@@ -451,7 +451,7 @@ setMethod(
 #' @exportMethod longFormat
 setMethod(
     "longFormat", "MultiAssayExperiment",
-    function(object, colDataCols = NULL, i = 1L, ...) {
+    function(object, i = 1L, colDataCols = NULL, ...) {
         if (any(.emptyAssays(experiments(object))))
             object <- .dropEmpty(object, warn = FALSE)
 
