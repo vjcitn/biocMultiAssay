@@ -286,8 +286,10 @@ mutation, etc), and following these are the *vital_status* and *days_to_death*
 colData columns that have been added:
 
 ```{r}
-longForm(miniACC[c("TP53", "CTNNB1"), , ],
-           colDataCols = c("vital_status", "days_to_death"))
+longForm(
+    miniACC[c("TP53", "CTNNB1"), , ],
+    colDataCols = c("vital_status", "days_to_death")
+)
 ```
 
 ## `wideFormat`
@@ -297,8 +299,10 @@ one row per primary identifier (patient). Here, each variable becomes a new
 column:
 
 ```{r}
-wideFormat(miniACC[c("TP53", "CTNNB1"), , ],
-           colDataCols = c("vital_status", "days_to_death"))
+wideFormat(
+    miniACC[c("TP53", "CTNNB1"), , ],
+    colDataCols = c("vital_status", "days_to_death")
+)
 ```
 
 # MultiAssayExperiment class construction and concatenation
@@ -313,10 +317,12 @@ biological units)
 
 The miniACC object can be reconstructed as follows:
 ```{r}
-MultiAssayExperiment(experiments=experiments(miniACC),
+MultiAssayExperiment(
+    experiments=experiments(miniACC),
     colData=colData(miniACC),
     sampleMap=sampleMap(miniACC),
-    metadata=metadata(miniACC))
+    metadata=metadata(miniACC)
+)
 ```
 
 
@@ -338,8 +344,11 @@ assumption. For example, to concatenate a matrix of log2-transformed RNA-seq
 results:
 
 ```{r}
-miniACC2 <- c(miniACC,
-    log2rnaseq = log2(assays(miniACC)$RNASeq2GeneNorm), mapFrom=1L)
+miniACC2 <- c(
+    miniACC,
+    log2rnaseq = log2(assays(miniACC)$RNASeq2GeneNorm),
+    mapFrom=1L
+)
 assays(miniACC2)
 ```
 
@@ -393,8 +402,10 @@ Choose the *EZH2* gene for demonstration. This subsetting will drop assays with
 no row named EZH2:
 
 ```{r}
-wideacc <- wideFormat(miniACC["EZH2", , ],
-    colDataCols = c("vital_status", "days_to_death", "pathology_N_stage"))
+wideacc <- wideFormat(
+    miniACC["EZH2", , ],
+    colDataCols = c("vital_status", "days_to_death", "pathology_N_stage")
+)
 wideacc$y <- Surv(wideacc$days_to_death, wideacc$vital_status)
 head(wideacc)
 ```
@@ -404,8 +415,11 @@ log2-transformed *EZH2* expression (RNASeq2GeneNorm), and nodal status
 (pathology_N_stage) as predictors:
 
 ```{r}
-coxph(Surv(days_to_death, vital_status) ~ gistict_EZH2 +
-          log2(RNASeq2GeneNorm_EZH2) + pathology_N_stage,  data=wideacc)
+coxph(
+    Surv(days_to_death, vital_status) ~
+        gistict_EZH2 + log2(RNASeq2GeneNorm_EZH2) + pathology_N_stage,
+    data = wideacc
+)
 ```
 
 We see that *EZH2* expression is significantly associated with overal survival
