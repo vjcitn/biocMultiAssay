@@ -946,20 +946,20 @@ It will error when the target data class does not support a `colData`
 replacement method, meaning that it typically works with `SummarizedExperiment`
 and `RaggedExperiment` assays and their extensions.
 
-## `longFormat` & `wideFormat`
+## `longForm` & `wideFormat`
 
 Produces *long* (default) or *wide* `DataFrame` objects. The following
 produces a long `DataFrame` (the default) for the first two assays:
 
 ```{r}
-longFormat(myMultiAssay[, , 1:2])
+longForm(myMultiAssay[, , 1:2])
 ```
 
 This is especially useful for performing regression against patient or sample
 data from `colData` using the `pDataCols` argument:
 
 ```{r}
-longFormat(myMultiAssay[, , 1:2], colDataCols="age")
+longForm(myMultiAssay[, , 1:2], colDataCols="age")
 ```
 
 The "wide" format is useful for calculating correlations or performing

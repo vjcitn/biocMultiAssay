@@ -269,12 +269,12 @@ column of the `colData`.
 
 # Transformation / reshaping
 
-The `longFormat` or `wideFormat` functions will "reshape" and combine
+The `longForm` or `wideFormat` functions will "reshape" and combine
 experiments with each other and with `colData` into one `DataFrame`. These
 functions provide compatibility with most of the common R/Bioconductor functions
 for regression, machine learning, and visualization.
 
-## `longFormat`
+## `longForm`
 
 In _long_ format a single column provides all assay results, with additional
 optional `colData` columns whose values are repeated as necessary.
@@ -286,7 +286,7 @@ mutation, etc), and following these are the *vital_status* and *days_to_death*
 colData columns that have been added:
 
 ```{r}
-longFormat(miniACC[c("TP53", "CTNNB1"), , ],
+longForm(miniACC[c("TP53", "CTNNB1"), , ],
            colDataCols = c("vital_status", "days_to_death"))
 ```
 
