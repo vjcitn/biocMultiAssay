@@ -93,7 +93,7 @@ in the \code{ExperimentList}}
 \item{value}{An assay compatible with the MultiAssayExperiment API}
 }
 \value{
-\code{subsetBy*} operations are endomorphic and return either
+\verb{subsetBy*}: operations are endomorphic and return either
 \code{MultiAssayExperiment} or \code{ExperimentList} depending on the
 input.
 }
@@ -110,12 +110,11 @@ inputs, the List will be applied to each of the elements in the
 The order of the subsetting elements in the
 \code{List} must match that of the \code{ExperimentList} in the
 \code{MultiAssayExperiment}.
-
 \itemize{
-\item subsetBycolData: Select biological units by vector input types
-\item subsetByColumn: Select observations by assay or for each assay
-\item subsetByRow: Select rows by assay or for each assay
-\item subsetByAssay: Select experiments
+\item \code{subsetBycolData}: Select biological units by vector input types
+\item \code{subsetByColumn}: Select observations by assay or for each assay
+\item \code{subsetByRow}: Select rows by assay or for each assay
+\item \code{subsetByAssay}: Select experiments
 }
 }
 \examples{

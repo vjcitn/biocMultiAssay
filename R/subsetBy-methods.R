@@ -91,14 +91,12 @@ NULL
 #' `List` must match that of the `ExperimentList` in the
 #' `MultiAssayExperiment`.
 #'
-#' \itemize{
-#' \item subsetBycolData: Select biological units by vector input types
-#' \item subsetByColumn: Select observations by assay or for each assay
-#' \item subsetByRow: Select rows by assay or for each assay
-#' \item subsetByAssay: Select experiments
-#' }
+#' * `subsetBycolData`: Select biological units by vector input types
+#' * `subsetByColumn`: Select observations by assay or for each assay
+#' * `subsetByRow`: Select rows by assay or for each assay
+#' * `subsetByAssay`: Select experiments
 #'
-#' @return \code{subsetBy*} operations are endomorphic and return either
+#' @return `subsetBy*`: operations are endomorphic and return either
 #' `MultiAssayExperiment` or `ExperimentList` depending on the
 #' input.
 #'
