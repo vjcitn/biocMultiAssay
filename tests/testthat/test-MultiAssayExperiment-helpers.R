@@ -240,13 +240,13 @@ test_that("renaming helpers work", {
 })
 
 
-test_that("longFormat,ANY-method works", {
+test_that("longForm,ANY-method works", {
     denv <- new.env(parent = emptyenv())
     data("miniACC", package="MultiAssayExperiment", envir = denv)
     miniACC <- denv[["miniACC"]]
 
     expect_silent(
-        longdf <- longFormat(miniACC)
+        longdf <- longForm(miniACC)
     )
     expect_true(
         all(
@@ -261,12 +261,12 @@ test_that("longFormat,ANY-method works", {
     rownames(se) <- c(1, 2, 4, 5)
 
     mae <- MultiAssayExperiment(list(x = se))
-    longformat <- longFormat(mae)
+    longform <- longForm(mae)
     expect_true(
-        is.character(longformat[["rowname"]])
+        is.character(longform[["rowname"]])
     )
     expect_identical(
         typeof(m),
-        typeof(longformat[["value"]])
+        typeof(longform[["value"]])
     )
 })

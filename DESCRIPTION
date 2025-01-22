@@ -27,7 +27,7 @@ Depends:
 Imports:
     Biobase,
     BiocBaseUtils,
-    BiocGenerics,
+    BiocGenerics (>= 0.53.4),
     DelayedArray,
     GenomicRanges,
     IRanges,
@@ -70,6 +70,7 @@ Collate:
     'data.R'
     'hasAssay.R'
     'listToMap.R'
+    'longFormat-deprecated.R'
     'mapToList.R'
     'prepMultiAssay.R'
     'reexports.R'

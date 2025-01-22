@@ -33,10 +33,9 @@ NULL
 #' * mergeReplicates: A function that combines replicated / repeated
 #'     measurements across all experiments and is guided by the replicated
 #'     return value
-#' * longFormat: A `MultiAssayExperiment` method that
-#'     returns a small and skinny [`DataFrame`][S4Vectors::DataFrame-class]. The
-#'     `colDataCols` arguments allows the user to append `colData` columns to
-#'     the data.
+#' * longForm: A `MultiAssayExperiment` method that returns a small and
+#'     skinny [`DataFrame`][S4Vectors::DataFrame-class]. The `colDataCols`
+#'     arguments allows the user to append `colData` columns to the data.
 #' * wideFormat: A function to reshape the data in a
 #'     `MultiAssayExperiment` to a "wide" format
 #'     [`DataFrame`][S4Vectors::DataFrame-class]. Each row in the `DataFrame`
@@ -340,65 +339,6 @@ setMethod("mergeReplicates", "ANY",
         return(object)
 })
 
-
-# longFormat generic and methods ------------------------------------------
-
-#' @rdname MultiAssayExperiment-helpers
-#' @aliases longFormat
-#' @export
-setGeneric(
-    "longFormat",
-    function(object, colDataCols = NULL, i = 1L, ...)
-    standardGeneric("longFormat")
-)
-
-#' @rdname MultiAssayExperiment-helpers
-#' @exportMethod longFormat
-setMethod("longFormat", "ANY", function(object, colDataCols, i = 1L, ...) {
-    rowNAMES <- rownames(object)
-    if (is.null(rowNAMES))
-        rowNames <- as.character(seq_len(nrow(object)))
-
-    if (is(object, "ExpressionSet"))
-        object <- Biobase::exprs(object)
-    if (is(object, "SummarizedExperiment") || is(object, "RaggedExperiment"))
-        object <- assay(object, i = i)
-
-    BiocBaseUtils::checkInstalled("reshape2")
-
-    res <- reshape2::melt(
-        object, varnames = c("rowname", "colname"), value.name = "value"
-    )
-    if (!is.character(res[["rowname"]]))
-        res[["rowname"]] <- as.character(res[["rowname"]])
-    res
-})
-
-#' @rdname MultiAssayExperiment-helpers
-#' @exportMethod longFormat
-setMethod(
-    "longFormat", "ExperimentList",
-    function(object, colDataCols, i = 1L, ...) {
-        samelength <- identical(length(object), length(i))
-        if (!samelength && identical(length(i), 1L))
-            i <- rep(i, length(object))
-        res <- mapply(
-            function(obj, obname, idx) {
-                data.frame(
-                    assay = obname,
-                    longFormat(obj, i = idx),
-                    stringsAsFactors = FALSE
-                )
-            }, obj = object, obname = names(object), idx = i, SIMPLIFY = FALSE
-        )
-
-        do.call(
-            function(...) rbind(..., make.row.names = FALSE),
-            res
-        )
-    }
-)
-
 .matchAddColData <- function(reshaped, colData, colDataCols) {
     extraColumns <- as.data.frame(colData[, colDataCols, drop = FALSE])
     rowNameValues <- rownames(extraColumns)
@@ -418,16 +358,18 @@ setMethod(
     reshaped[, c("assay", "primary", "rowname", "colname", "value")]
 }
 
+# longFrom method ---------------------------------------------------------
+
 #' @rdname MultiAssayExperiment-helpers
 #'
-#' @details The `longFormat` "ANY" class method, works with classes such as
+#' @details The `longForm` "ANY" class method, works with classes such as
 #' [`ExpressionSet`][Biobase::ExpressionSet] and
 #' [`SummarizedExperiment`][SummarizedExperiment::SummarizedExperiment-class] as
 #' well as `matrix` to provide a consistent long and skinny
 #' [`DataFrame`][S4Vectors::DataFrame-class].
 #'
-#' @section longFormat:
-#' The 'longFormat' method takes data from the [`ExperimentList`]
+#' @section longForm:
+#' The 'longForm' method takes data from the [`ExperimentList`]
 #' in a `MultiAssayExperiment` and returns a uniform
 #' `DataFrame`. The resulting DataFrame has columns indicating
 #' primary, rowname, colname and value. This method can optionally include
@@ -441,21 +383,24 @@ setMethod(
 #' @param colDataCols A `character`, `logical`, or `numeric`
 #'     index for `colData` columns to be included
 #'
-#' @param i longFormat: The i-th assay in
+#' @param i longForm: The i-th assay in
 #'     `SummarizedExperiment`-like objects. A vector input is
 #'     supported in the case that the `SummarizedExperiment` object(s) has more
 #'     than one assay (default 1L),
 #'     renameColname: Either a `numeric` or `character` index
 #'     indicating the assay whose colnames are to be renamed
 #'
-#' @exportMethod longFormat
+#' @importFrom BiocBaseUtils lifeCycle
+#' @importFrom BiocGenerics longForm
+#'
+#' @exportMethod longForm
 setMethod(
-    "longFormat", "MultiAssayExperiment",
+    "longForm", "MultiAssayExperiment",
     function(object, colDataCols = NULL, i = 1L, ...) {
         if (any(.emptyAssays(experiments(object))))
             object <- .dropEmpty(object, warn = FALSE)
 
-        longDataFrame <- longFormat(experiments(object), i = i)
+        longDataFrame <- longForm(experiments(object), i = i)
 
         longDataFrame <- .mapOrderPrimary(longDataFrame, sampleMap(object))
 
@@ -466,6 +411,51 @@ setMethod(
         as(longDataFrame, "DataFrame")
     }
 )
+
+#' @rdname MultiAssayExperiment-helpers
+#' @exportMethod longForm
+setMethod(
+    "longForm", "ExperimentList",
+    function(object, colDataCols, i = 1L, ...) {
+        samelength <- identical(length(object), length(i))
+        if (!samelength && identical(length(i), 1L))
+            i <- rep(i, length(object))
+        res <- mapply(
+            function(obj, obname, idx) {
+                data.frame(
+                    assay = obname,
+                    longForm(obj, i = idx),
+                    stringsAsFactors = FALSE
+                )
+            }, obj = object, obname = names(object), idx = i, SIMPLIFY = FALSE
+        )
+        do.call(
+            function(...) rbind(..., make.row.names = FALSE),
+            res
+        )
+    }
+)
+
+#' @rdname MultiAssayExperiment-helpers
+#' @exportMethod longForm
+setMethod("longForm", "ANY", function(object, colDataCols, i = 1L, ...) {
+    rowNAMES <- rownames(object)
+    if (is.null(rowNAMES)) rowNames <- as.character(seq_len(nrow(object)))
+
+    if (is(object, "ExpressionSet"))
+        object <- Biobase::exprs(object)
+    if (is(object, "SummarizedExperiment") || is(object, "RaggedExperiment"))
+        object <- assay(object, i = i)
+
+    BiocBaseUtils::checkInstalled("reshape2")
+
+    res <- reshape2::melt(
+        object, varnames = c("rowname", "colname"), value.name = "value"
+    )
+    if (!is.character(res[["rowname"]]))
+        res[["rowname"]] <- as.character(res[["rowname"]])
+    res
+})
 
 # wideformat function -----------------------------------------------------
 
@@ -551,7 +541,7 @@ wideFormat <- function(object, colDataCols = NULL, check.names = TRUE,
     if (is.null(colDataCols)) colDataCols <- character(0L)
     nameFUN <- if (check.names) make.names else I
     cnames <- colnames(object)
-    longDataFrame <- longFormat(experiments(object), i = i)
+    longDataFrame <- longForm(experiments(object), i = i)
     longList <- split(longDataFrame, longDataFrame[["assay"]])
     longList <- lapply(longList, .mapOrderPrimary, sampleMap(object))
     colsofinterest <- c("assay", "rowname")

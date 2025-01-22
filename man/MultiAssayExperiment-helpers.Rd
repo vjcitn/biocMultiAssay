@@ -17,10 +17,9 @@
 \alias{replicates,MultiAssayExperiment-method}
 \alias{mergeReplicates,MultiAssayExperiment-method}
 \alias{mergeReplicates,ANY-method}
-\alias{longFormat}
-\alias{longFormat,ANY-method}
-\alias{longFormat,ExperimentList-method}
-\alias{longFormat,MultiAssayExperiment-method}
+\alias{longForm,MultiAssayExperiment-method}
+\alias{longForm,ExperimentList-method}
+\alias{longForm,ANY-method}
 \alias{wideFormat}
 \alias{hasRowRanges}
 \alias{hasRowRanges,MultiAssayExperiment-method}
@@ -70,13 +69,11 @@ mergeReplicates(x, replicates = list(), simplify = BiocGenerics::mean, ...)
 
 \S4method{mergeReplicates}{ANY}(x, replicates = list(), simplify = BiocGenerics::mean, ...)
 
-longFormat(object, colDataCols = NULL, i = 1L, ...)
+\S4method{longForm}{MultiAssayExperiment}(object, colDataCols = NULL, i = 1L, ...)
 
-\S4method{longFormat}{ANY}(object, colDataCols = NULL, i = 1L, ...)
+\S4method{longForm}{ExperimentList}(object, colDataCols, i = 1L, ...)
 
-\S4method{longFormat}{ExperimentList}(object, colDataCols = NULL, i = 1L, ...)
-
-\S4method{longFormat}{MultiAssayExperiment}(object, colDataCols = NULL, i = 1L, ...)
+\S4method{longForm}{ANY}(object, colDataCols, i = 1L, ...)
 
 wideFormat(
   object,
@@ -121,7 +118,7 @@ as indicated by the \code{replicated} method for \code{MultiAssayExperiment}}
 \item{colDataCols}{A \code{character}, \code{logical}, or \code{numeric}
 index for \code{colData} columns to be included}
 
-\item{i}{longFormat: The i-th assay in
+\item{i}{longForm: The i-th assay in
 \code{SummarizedExperiment}-like objects. A vector input is
 supported in the case that the \code{SummarizedExperiment} object(s) has more
 than one assay (default 1L),
@@ -183,10 +180,9 @@ rowname) in the \code{sampleMap}
 \item mergeReplicates: A function that combines replicated / repeated
 measurements across all experiments and is guided by the replicated
 return value
-\item longFormat: A \code{MultiAssayExperiment} method that
-returns a small and skinny \code{\link[S4Vectors:DataFrame-class]{DataFrame}}. The
-\code{colDataCols} arguments allows the user to append \code{colData} columns to
-the data.
+\item longForm: A \code{MultiAssayExperiment} method that returns a small and
+skinny \code{\link[S4Vectors:DataFrame-class]{DataFrame}}. The \code{colDataCols}
+arguments allows the user to append \code{colData} columns to the data.
 \item wideFormat: A function to reshape the data in a
 \code{MultiAssayExperiment} to a "wide" format
 \code{\link[S4Vectors:DataFrame-class]{DataFrame}}. Each row in the \code{DataFrame}
@@ -251,7 +247,7 @@ class (endomorphic). The ellipsis or \code{...} argument allows the
 user to provide additional arguments to the \code{simplify} functional
 argument.
 
-The \code{longFormat} "ANY" class method, works with classes such as
+The \code{longForm} "ANY" class method, works with classes such as
 \code{\link[Biobase:class.ExpressionSet]{ExpressionSet}} and
 \code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment}} as
 well as \code{matrix} to provide a consistent long and skinny
@@ -275,9 +271,9 @@ multiple measurements on the \strong{same} sample (within the same assay)
 and can therefore be averaged.
 }
 
-\section{longFormat}{
+\section{longForm}{
 
-The 'longFormat' method takes data from the \code{\link{ExperimentList}}
+The 'longForm' method takes data from the \code{\link{ExperimentList}}
 in a \code{MultiAssayExperiment} and returns a uniform
 \code{DataFrame}. The resulting DataFrame has columns indicating
 primary, rowname, colname and value. This method can optionally include

@@ -42,14 +42,14 @@
 #' @source https://github.com/waldronlab/multiassayexperiment-tcga
 #'
 #' @usage data("miniACC")
-#' 
+#'
 #' @examples
 #'
 #' data("miniACC")
 #' metadata(miniACC)
 #' colnames(colData(miniACC))
 #' table(miniACC$vital_status)
-#' longFormat(
+#' longForm(
 #'     miniACC["MAPK3", , ],
 #'     colDataCols = c("vital_status", "days_to_death")
 #' )
