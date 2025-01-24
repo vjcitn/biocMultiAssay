@@ -274,6 +274,7 @@ test_that(".DollarNames replacement works", {
     env <- new.env(parent = emptyenv())
     data("miniACC",  envir = env)
     miniACC <- env[["miniACC"]]
+
     newIDs <- seq_len(nrow(colData(miniACC)))
     miniACC$patientID <- newIDs
     expect_identical(
@@ -291,5 +292,18 @@ test_that("MultiAssayExperiment,names<- replacement works", {
     )
     expect_error(
         names(miniACC) <- LETTERS
+    )
+})
+
+test_that("MultiAssayExperiment `[[` method works", {
+    env <- new.env(parent = emptyenv())
+    data("miniACC",  envir = env)
+    miniACC <- env[["miniACC"]]
+
+    expect_error(
+        miniACC[["gistict", exact = TRUE, ask = FALSE]]
+    )
+    expect_error(
+        miniACC[[1L, j = 2]]
     )
 })

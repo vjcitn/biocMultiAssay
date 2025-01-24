@@ -62,7 +62,12 @@ setMethod("[", c("MultiAssayExperiment", "ANY", "ANY", "ANY"),
 #' @export
 #' @rdname subsetBy
 setMethod("[[", "MultiAssayExperiment", function(x, i, j, ...) {
-    experiments(x)[[i]]
+    dotArgs <- list(...)
+    if (length(dotArgs) > 0L)
+        dotArgs <- dotArgs[names(dotArgs) != "exact"]
+    if (!missing(j) || length(dotArgs) > 0L)
+        stop("incorrect number of subscripts")
+    selectMethod(`[[`, "SimpleList")(experiments(x), i, j, ...)
 })
 
 #' @rdname subsetBy
