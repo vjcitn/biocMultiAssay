@@ -29,12 +29,14 @@
 }
 
 .write_h5_dimnames <- function(x, h5_path) {
+    BiocBaseUtils::checkInstalled("h5mread")
+    requireNamespace("h5mread", quietly = TRUE)
     dimnamesList <- lapply(x, dimnames)
     h5_names <- sprintf("assay%03d", seq_along(x))
     invisible(
         Map(
             function(dl, al) {
-                HDF5Array::h5writeDimnames(
+                h5mread::h5writeDimnames(
                     dimnames = dl, filepath = h5_path, name = al,
                     group = NA, h5dimnames = NULL
                 )

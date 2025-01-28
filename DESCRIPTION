@@ -38,6 +38,7 @@ Imports:
 Suggests:
     BiocStyle,
     HDF5Array,
+    h5mread,
     knitr,
     maftools,
     R.rsp,
