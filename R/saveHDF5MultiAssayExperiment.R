@@ -25,7 +25,20 @@
         message("Serialize ", class(x), " object to ",
                 ifelse(file.exists(rds_path), "existing ", ""),
                 "RDS file:\n  ", rds_path)
-    saveRDS(x, file=rds_path)
+
+    withCallingHandlers({
+        saveRDS(x, file = rds_path)
+    }, warning = function(w) {
+        oom <- conditionMessage(w)
+        if (grepl("out-of-memory", oom))
+            oom <- paste0(
+                oom,
+                "\n",
+                "Use 'loadHDF5MultiAssayExperiment()' to reliably load data."
+            )
+        warning(oom, call. = FALSE)
+        invokeRestart("muffleWarning")
+    })
 }
 
 .write_h5_dimnames <- function(x, h5_path) {
