@@ -9,6 +9,7 @@
 \alias{subsetByColumn}
 \alias{subsetByAssay}
 \alias{subset}
+\alias{subsetByRowData}
 \alias{subsetByRow,ExperimentList,ANY-method}
 \alias{subsetByRow,ExperimentList,list-method}
 \alias{subsetByRow,ExperimentList,List-method}
@@ -20,8 +21,13 @@
 \alias{subsetByColData,MultiAssayExperiment,ANY-method}
 \alias{subsetByColData,MultiAssayExperiment,character-method}
 \alias{subsetByRow,MultiAssayExperiment,ANY-method}
+\alias{subsetByRow,MultiAssayExperiment,list-method}
+\alias{subsetByRow,MultiAssayExperiment,List-method}
 \alias{subsetByColumn,MultiAssayExperiment,ANY-method}
 \alias{subsetByAssay,MultiAssayExperiment-method}
+\alias{subsetByRowData,MultiAssayExperiment,character,character-method}
+\alias{intersectByRowData}
+\alias{intersectByRowData,MultiAssayExperiment,character,character-method}
 \alias{[,MultiAssayExperiment,ANY,ANY,ANY-method}
 \alias{[[,MultiAssayExperiment,ANY,ANY-method}
 \alias{[[<-,MultiAssayExperiment,ANY,ANY-method}
@@ -29,6 +35,8 @@
 \title{Subsetting a MultiAssayExperiment object}
 \usage{
 subsetByRow(x, y, ...)
+
+subsetByRowData(x, y, rowDataCol, ...)
 
 subsetByColData(x, y)
 
@@ -38,11 +46,11 @@ subsetByAssay(x, y)
 
 \S4method{subsetByRow}{ExperimentList,ANY}(x, y, ...)
 
-\S4method{subsetByRow}{ExperimentList,list}(x, y)
+\S4method{subsetByRow}{ExperimentList,list}(x, y, ...)
 
-\S4method{subsetByRow}{ExperimentList,List}(x, y)
+\S4method{subsetByRow}{ExperimentList,List}(x, y, ...)
 
-\S4method{subsetByRow}{ExperimentList,logical}(x, y)
+\S4method{subsetByRow}{ExperimentList,logical}(x, y, ...)
 
 \S4method{subsetByColumn}{ExperimentList,list}(x, y)
 
@@ -56,11 +64,21 @@ subsetByAssay(x, y)
 
 \S4method{subsetByColData}{MultiAssayExperiment,character}(x, y)
 
-\S4method{subsetByRow}{MultiAssayExperiment,ANY}(x, y, ...)
+\S4method{subsetByRow}{MultiAssayExperiment,ANY}(x, y, i = TRUE, ...)
+
+\S4method{subsetByRow}{MultiAssayExperiment,list}(x, y, ...)
+
+\S4method{subsetByRow}{MultiAssayExperiment,List}(x, y, ...)
 
 \S4method{subsetByColumn}{MultiAssayExperiment,ANY}(x, y)
 
 \S4method{subsetByAssay}{MultiAssayExperiment}(x, y)
+
+\S4method{subsetByRowData}{MultiAssayExperiment,character,character}(x, y, rowDataCol, i = TRUE, ...)
+
+intersectByRowData(x, y, rowDataCol, i, ...)
+
+\S4method{intersectByRowData}{MultiAssayExperiment,character,character}(x, y, rowDataCol, i = TRUE, ...)
 
 \S4method{[}{MultiAssayExperiment,ANY,ANY,ANY}(x, i, j, k, ..., drop = FALSE)
 
@@ -73,13 +91,20 @@ subsetByAssay(x, y)
 \arguments{
 \item{x}{A \code{MultiAssayExperiment} or \code{ExperimentList}}
 
-\item{y}{Any argument used for subsetting, can be a \code{character},
-\code{logical}, \code{integer}, \code{list} or \code{List} vector}
+\item{y}{Either a \code{character}, \code{integer}, \code{logical}, \code{list}, \code{List},
+or \code{GRanges} object for subsetting by rows \emph{within the experiments}}
 
 \item{...}{Additional arguments passed on to lower level functions.}
 
-\item{i}{Either a \code{character}, \code{integer}, \code{logical} or
-\code{GRanges} object for subsetting by rows}
+\item{rowDataCol}{\code{character(1)} The name of the column in the \code{rowData}.
+If the column is not present, the experiment will be skipped. When
+\code{rowDataCol} is \code{"rownames"} or \code{"row.names"}, the values of \code{y} will
+be matched with the row names in the \code{rowData} of the experiment.}
+
+\item{i}{For the \code{subsetByRow} and \code{subsetByRowData} \code{MultiAssayExperiment}
+methods, either a \code{character}, \code{logical}, or \code{numeric} vector to selectively
+subset experiments with \code{y} (default is \code{TRUE}). For \strong{bracket} (\code{[})
+methods, see \code{y} input.}
 
 \item{j}{Either a \code{character}, \code{logical}, or \code{numeric} vector
 for subsetting by \code{colData} rows. See details for more information.}
@@ -102,7 +127,7 @@ A set of functions for extracting and dividing a
 \code{MultiAssayExperiment}
 }
 \details{
-Subsetting a MultiAssayExperiment by the \strong{j} index can yield a call
+Subsetting a \code{MultiAssayExperiment} by the \strong{j} index can yield a call
 to either \code{subsetByColData} or \code{subsetByColumn}. For vector inputs,
 the subset will be applied to the \code{colData} rows. For \code{List}-type
 inputs, the List will be applied to each of the elements in the
@@ -115,8 +140,32 @@ The order of the subsetting elements in the
 \item \code{subsetByColumn}: Select observations by assay or for each assay
 \item \code{subsetByRow}: Select rows by assay or for each assay
 \item \code{subsetByAssay}: Select experiments
+\item \code{subsetByRowData}: Select rows by values in the rowData
+\item \code{intersectByRowData}: Intersect with values in the rowData
 }
 }
+\section{rowData}{
+
+
+Some assays may have additional metadata associated with the rows.
+This metadata is stored in the \code{rowData} slot of the object, typically a
+\code{SummarizedExperiment} or \code{RangedSummarizedExperiment}.
+
+\code{subsetByRowData} allows the user to subset the rows of the assays
+based on the values in the \code{rowData}.
+
+\code{intersectByRowData} is a special case of \code{subsetByRowData} where
+the \code{rowData} values are intersected with the \code{y} values. Naturally,
+the \code{y} values are expected to be of type \code{character}.
+
+Note that \code{rowDataCols} allows the user to specify a particular
+column from which to extract the values for subsetting. This column
+name must be consistent across assays. If the column is not present
+in an assay, the assay will be skipped and considered a no-op. Assays
+are also skipped when there are no values in the \code{rowData} that match
+the \code{y} values.
+}
+
 \examples{
 ## Load the example MultiAssayExperiment
 example("MultiAssayExperiment")
@@ -157,4 +206,31 @@ subsetByRow(mae, c(TRUE, FALSE))
 ## Use a character vector
 subsetByRow(mae, "ENST00000355076")
 
+## Use i index to selectively subsetByRow
+subsetByRow(mae, "ENST00000355076", i = c(TRUE, TRUE, FALSE, FALSE))
+
+## only subset assays with rowRanges with GRanges input
+subsetByRow(mae, egr, i = hasRowRanges(mae))
+
+## Use i index to selectively subsetByRowData
+subsetByRowData(
+    mae, "ENST00000355076", "rownames", i = "Affy"
+)
+
+## use miniACC as example MAE
+data("miniACC")
+
+## intersect values of y with rownames in rowData
+intersectByRowData(
+    x = miniACC,
+    y = c("G6PD", "PETN"),
+    rowDataCol = "rownames",
+    i = c("RNASeq2GeneNorm", "gistict")
+)
+
+## no-op when rowDataCol is not present or there is no data
+intersectByRowData(
+    x = miniACC, y = c("G6PD", "PETN"), rowDataCol = "Genes",
+    i = c("RNASeq2GeneNorm", "gistict")
+)
 }

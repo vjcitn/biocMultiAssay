@@ -64,8 +64,13 @@ NULL
 #'
 #' @param x A `MultiAssayExperiment` or `ExperimentList`
 #'
-#' @param i Either a `character`, `integer`, `logical` or
-#' `GRanges` object for subsetting by rows
+#' @param y Either a `character`, `integer`, `logical`, `list`, `List`,
+#' or `GRanges` object for subsetting by rows _within the experiments_
+#'
+#' @param i For the `subsetByRow` and `subsetByRowData` `MultiAssayExperiment`
+#' methods, either a `character`, `logical`, or `numeric` vector to selectively
+#' subset experiments with `y` (default is `TRUE`). For **bracket** (`[`)
+#' methods, see `y` input.
 #'
 #' @param j Either a `character`, `logical`, or `numeric` vector
 #' for subsetting by `colData` rows. See details for more information.
@@ -77,6 +82,11 @@ NULL
 #'
 #' @param drop logical (default FALSE) whether to drop all empty assay elements
 #' in the `ExperimentList`
+#'
+#' @param rowDataCol `character(1)` The name of the column in the `rowData`.
+#' If the column is not present, the experiment will be skipped. When
+#' `rowDataCol` is `"rownames"` or `"row.names"`, the values of `y` will
+#' be matched with the row names in the `rowData` of the experiment.
 #'
 #' @aliases [,MultiAssayExperiment,ANY-method subsetByColData subsetByRow
 #' subsetByColumn subsetByAssay subset subsetBy
@@ -95,6 +105,28 @@ NULL
 #' * `subsetByColumn`: Select observations by assay or for each assay
 #' * `subsetByRow`: Select rows by assay or for each assay
 #' * `subsetByAssay`: Select experiments
+#' * `subsetByRowData`: Select rows by values in the rowData
+#' * `intersectByRowData`: Intersect with values in the rowData
+#'
+#' @section rowData:
+#'
+#' Some assays may have additional metadata associated with the rows.
+#' This metadata is stored in the `rowData` slot of the object, typically a
+#' `SummarizedExperiment` or `RangedSummarizedExperiment`.
+#'
+#' `subsetByRowData` allows the user to subset the rows of the assays
+#' based on the values in the `rowData`.
+#'
+#' `intersectByRowData` is a special case of `subsetByRowData` where
+#' the `rowData` values are intersected with the `y` values. Naturally,
+#' the `y` values are expected to be of type `character`.
+#'
+#' Note that `rowDataCols` allows the user to specify a particular
+#' column from which to extract the values for subsetting. This column
+#' name must be consistent across assays. If the column is not present
+#' in an assay, the assay will be skipped and considered a no-op. Assays
+#' are also skipped when there are no values in the `rowData` that match
+#' the `y` values.
 #'
 #' @return `subsetBy*`: operations are endomorphic and return either
 #' `MultiAssayExperiment` or `ExperimentList` depending on the
@@ -140,6 +172,33 @@ NULL
 #' ## Use a character vector
 #' subsetByRow(mae, "ENST00000355076")
 #'
+#' ## Use i index to selectively subsetByRow
+#' subsetByRow(mae, "ENST00000355076", i = c(TRUE, TRUE, FALSE, FALSE))
+#'
+#' ## only subset assays with rowRanges with GRanges input
+#' subsetByRow(mae, egr, i = hasRowRanges(mae))
+#'
+#' ## Use i index to selectively subsetByRowData
+#' subsetByRowData(
+#'     mae, "ENST00000355076", "rownames", i = "Affy"
+#' )
+#'
+#' ## use miniACC as example MAE
+#' data("miniACC")
+#'
+#' ## intersect values of y with rownames in rowData
+#' intersectByRowData(
+#'     x = miniACC,
+#'     y = c("G6PD", "PETN"),
+#'     rowDataCol = "rownames",
+#'     i = c("RNASeq2GeneNorm", "gistict")
+#' )
+#'
+#' ## no-op when rowDataCol is not present or there is no data
+#' intersectByRowData(
+#'     x = miniACC, y = c("G6PD", "PETN"), rowDataCol = "Genes",
+#'     i = c("RNASeq2GeneNorm", "gistict")
+#' )
 NULL
 
 # subsetBy Generics -------------------------------------------------------
@@ -147,6 +206,13 @@ NULL
 #' @rdname subsetBy
 #' @export subsetByRow
 setGeneric("subsetByRow", function(x, y, ...) standardGeneric("subsetByRow"))
+
+#' @rdname subsetBy
+#' @export subsetByRowData
+setGeneric(
+    "subsetByRowData",
+    function(x, y, rowDataCol, ...) standardGeneric("subsetByRowData")
+)
 
 #' @rdname subsetBy
 #' @export subsetByColData
@@ -158,8 +224,6 @@ setGeneric("subsetByColumn", function(x, y) standardGeneric("subsetByColumn"))
 
 #' @rdname subsetBy
 #' @export subsetByAssay
-#' @param y Any argument used for subsetting, can be a `character`,
-#' `logical`, `integer`, `list` or `List` vector
 setGeneric("subsetByAssay", function(x, y) standardGeneric("subsetByAssay"))
 
 .subsetCOLS <- function(object, cutter) {
@@ -207,13 +271,13 @@ setMethod("subsetByRow", c("ExperimentList", "ANY"), function(x, y, ...) {
 })
 
 #' @rdname subsetBy
-setMethod("subsetByRow", c("ExperimentList", "list"), function(x, y) {
+setMethod("subsetByRow", c("ExperimentList", "list"), function(x, y, ...) {
     y <- .fillEmptyExps(x, y)
     .subsetROWS(x, y)
 })
 
 #' @rdname subsetBy
-setMethod("subsetByRow", c("ExperimentList", "List"), function(x, y) {
+setMethod("subsetByRow", c("ExperimentList", "List"), function(x, y, ...) {
     if (is(y, "DataFrame") || is(y, "GRangesList"))
         stop("Provide a list of indices for subsetting")
     if (is(y, "GRanges"))
@@ -223,7 +287,7 @@ setMethod("subsetByRow", c("ExperimentList", "List"), function(x, y) {
 })
 
 #' @rdname subsetBy
-setMethod("subsetByRow", c("ExperimentList", "logical"), function(x, y) {
+setMethod("subsetByRow", c("ExperimentList", "logical"), function(x, y, ...) {
     logi <- LogicalList(rep(list(y), length(x)))
     x[logi]
 })
@@ -255,7 +319,7 @@ setMethod("subsetByAssay", c("ExperimentList", "ANY"), function(x, y) {
     x[y]
 })
 
-# subsetByColData,MultiAssayExperiment-methods -----------------------------------------
+# subsetByColData,MultiAssayExperiment-methods ----------------------------
 
 #' @rdname subsetBy
 setMethod("subsetByColData", c("MultiAssayExperiment", "ANY"), function(x, y) {
@@ -312,10 +376,38 @@ setMethod("subsetByColData", c("MultiAssayExperiment", "character"),
 # subsetByRow,MultiAssayExperiment-method ---------------------------------
 
 #' @rdname subsetBy
-setMethod("subsetByRow", c("MultiAssayExperiment", "ANY"), function(x, y, ...) {
-    experiments(x) <- subsetByRow(experiments(x), y)
-    return(x)
-})
+#' @exportMethod subsetByRow
+setMethod(
+    "subsetByRow", c("MultiAssayExperiment", "ANY"),
+    function(x, y, i = TRUE, ...) {
+        stopifnot(
+            !anyNA(i) &&
+                (is.logical(i) || is.character(i) || is.numeric(i))
+        )
+        experiments(x)[i] <- subsetByRow(experiments(x)[i], y)
+        return(x)
+    }
+)
+
+#' @rdname subsetBy
+setMethod(
+    "subsetByRow", c("MultiAssayExperiment", "list"),
+    function(x, y, ...) {
+        experiments(x) <- subsetByRow(experiments(x), y)
+        return(x)
+    }
+)
+
+#' @rdname subsetBy
+setMethod(
+    "subsetByRow", c("MultiAssayExperiment", "List"),
+    function(x, y, ...) {
+        if (is(y, "GRanges"))
+            return(callNextMethod())
+        y <- as.list(y)
+        subsetByRow(x, y)
+    }
+)
 
 # subsetByColumn,MultiAssayExperiment-method ------------------------------
 
@@ -343,3 +435,94 @@ setMethod("subsetByAssay", c("MultiAssayExperiment", "ANY"), function(x, y) {
     experiments(x) <- subexp
     return(x)
 })
+
+# subsetByRowData,MultiAssayExperiment-method -----------------------------
+
+#' @rdname subsetBy
+setMethod(
+    "subsetByRowData", c("MultiAssayExperiment", "character", "character"),
+    function(x, y, rowDataCol, i = TRUE, ...) {
+        if (is.character(i))
+            logi <- names(x) %in% i
+        else if (is.logical(i) || is.numeric(i))
+            logi <- names(x) %in% names(x)[i]
+        else
+            stop("Invalid experiment subscript type for 'i'")
+        valids <- hasRowData(x)[which(logi)]
+        if (any(!valids)) {
+            notValids <- paste(
+                names(valids[!valids]), collapse = ", "
+            )
+            stop("Selected experiments have no 'rowData': ", notValids)
+        }
+        i <- hasRowData(x) & logi
+        if (!any(i))
+            stop("No 'rowData' available for subsetting")
+        y <- lapply(
+            experiments(x)[i],
+            function(exper) {
+                rd <- rowData(exper)
+                if (rowDataCol %in% c("rownames", "row.names"))
+                    rownames(rd) %in% y
+                else if (rowDataCol %in% colnames(rd))
+                    rd[[rowDataCol]] %in% y
+                else
+                    TRUE
+            }
+        )
+        subsetByRow(x = x, y = y, i = i)
+    }
+)
+
+
+# intersectByRowData,MultiAssayExperiment-method --------------------------
+
+#' @rdname subsetBy
+#'
+#' @aliases intersectByRowData
+#'
+#' @export
+setGeneric(
+    "intersectByRowData",
+    function(x, y, rowDataCol, i, ...)
+        standardGeneric("intersectByRowData")
+)
+
+#' @rdname subsetBy
+#' @exportMethod intersectByRowData
+setMethod(
+    "intersectByRowData", c("MultiAssayExperiment", "character", "character"),
+    function(x, y, rowDataCol, i = TRUE, ...) {
+        if (is.character(i))
+            logi <- names(x) %in% i
+        else if (is.logical(i) || is.numeric(i))
+            logi <- names(x) %in% names(x)[i]
+        else
+            stop("Invalid experiment subscript type for 'i'")
+        i <- hasRowData(x) & logi
+        if (!any(i))
+            stop("No 'rowData' available for subsetting")
+        y <- lapply(
+            experiments(x)[i],
+            function(exper) {
+                rd <- rowData(exper)
+                if (rowDataCol %in% c("rownames", "row.names"))
+                    intersect(rownames(rd), y)
+                else if (rowDataCol %in% colnames(rd))
+                    intersect(rd[[rowDataCol]], y)
+                else
+                    NULL
+            }
+        )
+        noRowData <-
+            vapply(y, function(z) is.null(z) || !length(z), logical(1))
+        if (any(noRowData)) {
+            noRDnames <- paste(shQuote(names(y)[noRowData]), collapse = ", ")
+            warning(
+                "No 'rowData' intersected for assays:\n  ", noRDnames,
+                call. = FALSE
+            )
+        }
+        subsetByRow(x = x, y = y, i = i)
+    }
+)
