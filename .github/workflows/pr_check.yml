@@ -25,7 +25,7 @@ jobs:
           echo "CRAN=https://packagemanager.posit.co/cran/__linux__/${CODENAME}/latest" >> "$GITHUB_ENV"
 
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Query dependencies
         run: |
