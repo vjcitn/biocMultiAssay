@@ -35,11 +35,15 @@ jobs:
           extra-packages: any::covr, any::xml2
           needs: coverage
 
+      - name: Install GPG
+        run: sudo apt-get update && sudo apt-get install -y gpg
+
       - name: Run package coverage
         run: |
           cov <- covr::package_coverage(
             quiet = FALSE,
             clean = FALSE,
+            type = "all",
             install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
           )
           covr::to_cobertura(cov)
