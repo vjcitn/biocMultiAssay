@@ -27,9 +27,10 @@ jobs:
           echo "CRAN=https://packagemanager.posit.co/cran/__linux__/${CODENAME}/latest" >> "$GITHUB_ENV"
 
       - name: Checkout Repository
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - name: Install R Dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::covr, any::xml2
           needs: coverage
